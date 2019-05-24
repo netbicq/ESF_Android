@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:elevation="3dp"
+    android:foreground="?android:attr/selectableItemBackground"
+    android:orientation="horizontal">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_left1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:ellipsize="end"
+                android:gravity="center|left"
+                android:lines="1"
+                android:padding="5dp"
+                android:singleLine="true"
+                android:text="风险点" />
+
+            <TextView
+                android:id="@+id/tv_right1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:ellipsize="end"
+                android:gravity="center|end"
+                android:lines="1"
+                android:padding="5dp"
+                android:singleLine="true"
+                android:text="状态" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_left2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:gravity="center|left"
+                android:padding="5dp"
+                android:text="风险等级" />
+
+            <TextView
+                android:id="@+id/tv_right2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:gravity="center|right"
+                android:padding="5dp"
+                android:text="隐患等级" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#d2d2d2" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/ll_container"
+        android:layout_width="wrap_content"
+        android:orientation="horizontal"
+        android:layout_height="match_parent">
+        <com.qmuiteam.qmui.widget.QMUIFontFitTextView
+            android:visibility="gone"
+            android:id="@+id/tv_menu1"
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:background="@color/theme"
+            android:gravity="center"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:text="申请验收"
+            android:textColor="#FFFFFFFF"
+            android:textSize="14sp" />
+        <com.qmuiteam.qmui.widget.QMUIFontFitTextView
+            android:visibility="gone"
+            android:id="@+id/tv_menu2"
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:background="@color/colorPrimary"
+            android:gravity="center"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:text="验收"
+            android:textColor="#FFFFFFFF"
+            android:textSize="14sp" />
+        <com.qmuiteam.qmui.widget.QMUIFontFitTextView
+            android:visibility="gone"
+            android:id="@+id/tv_menu3"
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:background="@color/colorPrimaryDark"
+            android:gravity="center"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:text="处理"
+            android:textColor="#FFFFFFFF"
+            android:textSize="14sp" />
+        <com.qmuiteam.qmui.widget.QMUIFontFitTextView
+            android:visibility="gone"
+            android:id="@+id/tv_menu4"
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:background="@color/colorAccent"
+            android:gravity="center"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:text="归档"
+            android:textColor="#FFFFFFFF"
+            android:textSize="14sp" />
+        <com.qmuiteam.qmui.widget.QMUIFontFitTextView
+            android:visibility="gone"
+            android:id="@+id/tv_menu5"
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:background="@color/complete"
+            android:gravity="center"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:text="转让责任人"
+            android:textColor="#FFFFFFFF"
+            android:textSize="14sp" />
+        <com.qmuiteam.qmui.widget.QMUIFontFitTextView
+            android:visibility="gone"
+            android:id="@+id/tv_menu6"
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:background="@color/orange"
+            android:gravity="center"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:text="快速处理"
+            android:textColor="#FFFFFFFF"
+            android:textSize="14sp" />
+    </LinearLayout>
+</LinearLayout>

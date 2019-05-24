@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="kkkj.android.esafety">
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.VIBRATE"></uses-permission>
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+
+    <uses-permission android:name="android.permission.FLASHLIGHT" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
+
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+    <application
+        android:name=".app.ESafety"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:networkSecurityConfig="@xml/network_security_config"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/EsafetyTheme">
+
+        <!--bugly-->
+        <provider
+            android:name=".utils.BuglyFileProvider"
+            android:authorities="${applicationId}.fileProvider"
+            android:exported="false"
+            android:grantUriPermissions="true"
+            tools:replace="name,authorities,exported,grantUriPermissions">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths"
+                tools:replace="name,resource"/>
+        </provider>
+        <activity
+            android:name="com.tencent.bugly.beta.ui.BetaActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize|locale"
+            android:theme="@android:style/Theme.Translucent" />
+        <!--TBS播放器-->
+        <activity
+
+            android:name="com.tencent.smtt.sdk.VideoActivity"
+
+            android:alwaysRetainTaskState="true"
+
+            android:configChanges="orientation|screenSize|keyboardHidden"
+
+            android:exported="false"
+
+            android:launchMode="singleTask">
+
+            <intent-filter>
+
+                <action android:name="com.tencent.smtt.tbs.video.PLAY" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+            </intent-filter>
+
+        </activity>
+
+        <!--裁剪回调-->
+        <activity
+            android:name="com.linchaolong.android.imagepicker.cropper.CropImageActivity"
+            android:theme="@style/Base.Theme.AppCompat" />
+
+        <activity android:name=".MainActivity">
+
+        </activity>
+        <activity android:name=".login.view.LoginActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".menu.task.view.MyTaskActivity" />
+        <activity android:name=".menu.bill.view.MyTaskBillActivity" />
+        <activity android:name=".menu.bill.view.MyTaskDetailsActivity" />
+        <activity android:name=".common.pickperson.PickPersonActivity" />
+        <activity android:name=".menu.bill.view.TaskResultActivity" />
+        <activity android:name=".common.getpic.GetPicOrMP4Activity" />
+        <activity android:name=".menu.mine.view.MyMessageActivity" />
+        <activity android:name=".menu.mine.view.MyDataActivity" />
+        <activity android:name=".menu.mine.view.AboutActivity" />
+        <activity android:name=".menu.mine.view.FeedbackActivity" />
+        <activity android:name=".menu.mine.view.SettingActivity" />
+        <activity android:name=".menu.work.view.AddWorkActivity" />
+        <activity android:name=".menu.work.view.MyWorkActivity2" />
+        <activity android:name=".menu.work.view.MyWorkDetailsActivity" />
+        <activity android:name=".menu.temptask.view.AddTemWorkActivity" />
+        <activity android:name=".menu.institution.view.InstitutionActivity" />
+        <activity android:name=".menu.institution.view.InstitutionContentActivity" />
+        <activity android:name=".menu.institution.view.RPlanContentActivity" />
+        <activity android:name=".menu.vedio.view.VideoMonitorListActivity" />
+        <activity android:name=".common.WebViewActivity" />
+        <activity android:name=".menu.hidden.view.HandleCtrActivity" />
+        <activity android:name=".menu.hidden.view.HiddenDetailsActivity" />
+        <activity android:name=".menu.hidden.view.HiddenTroubleControlActivity" />
+        <activity android:name=".home.view.WindControlScanningActivity" />
+        <activity android:name=".home.view.TaskScanningActivity" />
+    </application>
+
+</manifest>

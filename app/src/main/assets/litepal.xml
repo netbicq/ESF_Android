@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<litepal>
+    <dbname value="ESafety" />
+    <version value="5" />
+    <list>
+        <mapping class="kkkj.android.esafety.bean.InsepctTaskByEmployee"/>
+        <mapping class="kkkj.android.esafety.bean.TaskBillModel"/>
+        <mapping class="kkkj.android.esafety.bean.TaskSubjectView"/>
+        <mapping class="kkkj.android.esafety.bean.Subject"/>
+        <mapping class="kkkj.android.esafety.bean.AttachFileNew"/>
+        <mapping class="kkkj.android.esafety.bean.WHYSDict"/>
+        <!--<mapping class="kkkj.android.esafety.bean.SGLXDict"/>-->
+        <!--<mapping class="kkkj.android.esafety.bean.SGHGDict"/>-->
+        <!--<mapping class="kkkj.android.esafety.bean.YXFWDict"/>-->
+        <!--<mapping class="kkkj.android.esafety.bean.DangerLevel"/>-->
+        <!--<mapping class="kkkj.android.esafety.bean.EMethod"/>-->
+        <!--<mapping class="kkkj.android.esafety.bean.TroubleLevel"/>-->
+        <mapping class="kkkj.android.esafety.bean.Org"/>
+        <mapping class="kkkj.android.esafety.bean.Emp"/>
+        <mapping class="kkkj.android.esafety.bean.IsJumpModel"/>
+
+        <mapping class="kkkj.android.esafety.bean.EnumItem"/>
+        <mapping class="kkkj.android.esafety.bean.Dict"/>
+        <mapping class="kkkj.android.esafety.bean.DangerLevelDict"/>
+        <mapping class="kkkj.android.esafety.bean.Eval_Dict"/>
+    </list>
+</litepal>

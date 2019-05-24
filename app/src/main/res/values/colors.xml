@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+    <color name="theme"> #5CACEE</color>
+    <color name="divide"> #d2d2d2</color>
+    <color name="complete"> #2bb673</color>
+    <color name="orange"> #FFA500</color>
+    <color name="gray"> #dddddd</color>
+    <color name="temporary">#FFA07A</color>
+</resources>

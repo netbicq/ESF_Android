@@ -1,0 +1,1 @@
+include ':app', ':camera', ':lib-zxing', ':library', ':pickerview', ':wheelview', ':treeview_lib'

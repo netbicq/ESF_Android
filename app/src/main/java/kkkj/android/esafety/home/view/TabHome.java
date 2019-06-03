@@ -41,6 +41,7 @@ import kkkj.android.esafety.home.presenter.TabHomePresenter;
 import kkkj.android.esafety.menu.bill.view.MyTaskBillActivity;
 import kkkj.android.esafety.menu.hidden.view.HiddenTroubleControlActivity;
 import kkkj.android.esafety.menu.institution.view.InstitutionActivity;
+import kkkj.android.esafety.menu.institution.view.InstitutionActivity2;
 import kkkj.android.esafety.menu.temptask.view.AddTemWorkActivity;
 import kkkj.android.esafety.menu.vedio.view.VideoMonitorListActivity;
 import kkkj.android.esafety.menu.work.view.MyWorkActivity2;
@@ -108,9 +109,9 @@ public class TabHome extends MvpBaseFragment<TabHomePresenter> implements View.O
                     case "临时任务":
                         startActivity(new Intent(mContext, AddTemWorkActivity.class));
                         break;
-                    case "制度和预案":
+                    case "风险公示":
                         //制度和预案
-                        startActivity(new Intent(mContext, InstitutionActivity.class));
+                        startActivity(new Intent(mContext, InstitutionActivity2.class));
                         break;
                     case "视频监控":
                         //视频监控
@@ -143,6 +144,7 @@ public class TabHome extends MvpBaseFragment<TabHomePresenter> implements View.O
                 }
             }
         });
+        smartRefreshLayout.autoRefresh();
     }
 
 
@@ -159,7 +161,6 @@ public class TabHome extends MvpBaseFragment<TabHomePresenter> implements View.O
     public void onResume() {
         super.onResume();
         Logger.d("onResume");
-        smartRefreshLayout.autoRefresh();
     }
 
     public void setMenu() {
@@ -184,7 +185,7 @@ public class TabHome extends MvpBaseFragment<TabHomePresenter> implements View.O
         menu4.setImgId(R.drawable.ic34);
         menu4.setName("风控点扫描");
         menu5.setImgId(R.drawable.ic9);
-        menu5.setName("制度和预案");
+        menu5.setName("风险公示");
         menu6.setImgId(R.drawable.ic10);
         menu6.setName("视频监控");
         menu8.setImgId(R.drawable.ic36);

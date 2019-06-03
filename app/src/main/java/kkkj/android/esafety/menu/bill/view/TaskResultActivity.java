@@ -194,6 +194,8 @@ public class TaskResultActivity extends MvpBaseActivity<TaskResultPresenter> imp
         if (IsControl) {
             tv_danger.setEnabled(false);
             DangersPicker.setSelectOptions(2);
+            tv_danger.setText(Dangers.get(2));
+            result = 3;
         } else {
             tv_danger.setEnabled(true);
         }
@@ -926,7 +928,7 @@ public class TaskResultActivity extends MvpBaseActivity<TaskResultPresenter> imp
 
 
         //用于LSD方法计算的选项，S
-        LSD_LsPicker = picker.getPicker(mContext, "LSD_S", new OnOptionsSelectListener() {
+        LSD_LsPicker = picker.getPicker(mContext, "LSD_L", new OnOptionsSelectListener() {
             @Override
             public void onOptionsSelect(int options1, int options2, int options3, View v) {
                 tv_evalLSD_S.setText(LSD_Ls.get(options1).getDictName());
@@ -947,7 +949,7 @@ public class TaskResultActivity extends MvpBaseActivity<TaskResultPresenter> imp
 
 
         //用于LSD方法计算的选项，C
-        LSD_SsPicker = picker.getPicker(mContext, "LSD_C", new OnOptionsSelectListener() {
+        LSD_SsPicker = picker.getPicker(mContext, "LSD_S", new OnOptionsSelectListener() {
             @Override
             public void onOptionsSelect(int options1, int options2, int options3, View v) {
                 tv_evalLSD_C.setText(LSD_Ss.get(options1).getDictName());
@@ -982,7 +984,7 @@ public class TaskResultActivity extends MvpBaseActivity<TaskResultPresenter> imp
                     cDangerLevelDict = dangerLevelDictList.get(0);
                     tv_dangerLevel.setText(cDangerLevelDict.getDictName());
                     requestNew.setDangerLevel(cDangerLevelDict.getKeyID());
-                    requestNew.setDValue(1);
+                    requestNew.setDValue((int) level);
                     cDangerLevel = cDangerLevelDict;
                     tv_dangerLevel.setOnLongClickListener(new View.OnLongClickListener() {
                         @Override
@@ -1026,7 +1028,7 @@ public class TaskResultActivity extends MvpBaseActivity<TaskResultPresenter> imp
                     cDangerLevelDict = dangerLevelDictList.get(0);
                     tv_dangerLevel.setText(cDangerLevelDict.getDictName());
                     requestNew.setDangerLevel(cDangerLevelDict.getKeyID());
-                    requestNew.setDValue(1);
+                    requestNew.setDValue((int) level);
                     cDangerLevel = cDangerLevelDict;
 
 

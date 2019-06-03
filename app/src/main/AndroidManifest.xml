@@ -111,6 +111,8 @@
         <activity android:name=".menu.hidden.view.HiddenTroubleControlActivity" />
         <activity android:name=".home.view.WindControlScanningActivity" />
         <activity android:name=".home.view.TaskScanningActivity" />
+        <activity android:name=".common.getpic.PhotoViewActivity" />
+        <activity android:name=".menu.institution.view.InstitutionActivity2" />
     </application>
 
 </manifest>

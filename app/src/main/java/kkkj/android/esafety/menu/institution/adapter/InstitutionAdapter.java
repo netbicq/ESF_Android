@@ -21,6 +21,5 @@ public class InstitutionAdapter extends BaseQuickAdapter<PhoneDocInstitutionView
         helper.setText(R.id.tv_type,item.getInstitutionType());
         helper.setText(R.id.tv_size,item.getBigCode());
         helper.setText(R.id.tv_date,item.getIssueDate());
-
     }
 }

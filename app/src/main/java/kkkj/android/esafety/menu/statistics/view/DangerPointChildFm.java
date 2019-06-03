@@ -81,16 +81,15 @@ public class DangerPointChildFm extends MvpBaseFragment<DangerPointChildPresente
                 mPresenter.getDangerPointsPage(request);
             }
         });
-
+        request.setPageIndex(PageIndex);
+        request.setPageSize(PageSize);
+        request.setQuery(pointID);
+        mPresenter.getDangerPointsPage(request);
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        request.setPageIndex(PageIndex);
-        request.setPageSize(PageSize);
-        request.setQuery(pointID);
-        mPresenter.getDangerPointsPage(request);
     }
 
     @Override

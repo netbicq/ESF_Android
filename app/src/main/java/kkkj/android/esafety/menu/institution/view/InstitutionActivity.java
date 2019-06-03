@@ -38,7 +38,7 @@ public class InstitutionActivity extends MvpBaseActivity {
 
     @Override
     protected void initMonitorAndData() {
-        action_bar_title.setText("制度和预案");
+        action_bar_title.setText("风险公示");
         String[] mTitles = {"制度", "预案"};
         tabLayout_1.setTabData(mTitles);
         tabLayout_1.setOnTabSelectListener(new OnTabSelectListener() {

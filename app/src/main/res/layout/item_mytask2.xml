@@ -17,7 +17,7 @@
                 android:layout_width="0dp"
                 android:layout_weight="2"
                 android:gravity="center|left"
-                android:padding="5dp"
+                style="@style/BaseTextViewStyle"
                 android:layout_height="wrap_content"
                 android:text=""
                 android:id="@+id/tv_name"
@@ -29,7 +29,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
                 android:gravity="center"
-                android:padding="5dp" />
+                style="@style/BaseTextViewStyle" />
 
             <TextView
                 android:id="@+id/tv_frequency"
@@ -37,7 +37,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
                 android:gravity="center|right"
-                android:padding="5dp" />
+                style="@style/BaseTextViewStyle" />
         </LinearLayout>
 
         <LinearLayout
@@ -51,7 +51,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
                 android:gravity="center|left"
-                android:padding="5dp" />
+                style="@style/BaseTextViewStyle"/>
 
             <TextView
                 android:id="@+id/tv_timeOutHours"
@@ -59,7 +59,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
                 android:gravity="center|right"
-                android:padding="5dp" />
+                style="@style/BaseTextViewStyle" />
         </LinearLayout>
         <View
             android:layout_width="match_parent"
@@ -68,7 +68,7 @@
     </LinearLayout>
 
 
-    <com.qmuiteam.qmui.widget.QMUIFontFitTextView
+    <TextView
         android:id="@+id/tv_delete"
         android:layout_width="60dp"
         android:layout_height="match_parent"
@@ -78,5 +78,5 @@
         android:paddingEnd="16dp"
         android:text="新建单据"
         android:textColor="#FFFFFFFF"
-        android:textSize="14sp" />
+        android:textSize="13sp" />
 </LinearLayout>

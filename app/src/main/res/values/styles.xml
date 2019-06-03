@@ -12,4 +12,13 @@
         <item name="colorPrimaryDark">#5CACEE</item>
         <item name="colorAccent">#5CACEE</item>
     </style>
+
+    <style name="BaseTextViewStyle" parent="TextView.Compat">
+        <item name="android:textSize">14sp</item>
+        <item name="android:color">#515151</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:lines">1</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:padding">5dp</item>
+    </style>
 </resources>

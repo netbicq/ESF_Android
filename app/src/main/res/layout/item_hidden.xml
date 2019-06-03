@@ -12,6 +12,7 @@
         android:orientation="vertical">
 
         <LinearLayout
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
@@ -21,11 +22,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
-                android:ellipsize="end"
+                style="@style/BaseTextViewStyle"
                 android:gravity="center|left"
-                android:lines="1"
-                android:padding="5dp"
-                android:singleLine="true"
                 android:text="风险点" />
 
             <TextView
@@ -35,9 +33,7 @@
                 android:layout_weight="2"
                 android:ellipsize="end"
                 android:gravity="center|end"
-                android:lines="1"
-                android:padding="5dp"
-                android:singleLine="true"
+                style="@style/BaseTextViewStyle"
                 android:text="状态" />
         </LinearLayout>
 
@@ -61,7 +57,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
                 android:gravity="center|right"
-                android:padding="5dp"
+                style="@style/BaseTextViewStyle"
                 android:text="隐患等级" />
         </LinearLayout>
 
@@ -75,7 +71,7 @@
         android:layout_width="wrap_content"
         android:orientation="horizontal"
         android:layout_height="match_parent">
-        <com.qmuiteam.qmui.widget.QMUIFontFitTextView
+        <TextView
             android:visibility="gone"
             android:id="@+id/tv_menu1"
             android:layout_width="60dp"
@@ -86,8 +82,8 @@
             android:paddingEnd="16dp"
             android:text="申请验收"
             android:textColor="#FFFFFFFF"
-            android:textSize="14sp" />
-        <com.qmuiteam.qmui.widget.QMUIFontFitTextView
+            android:textSize="12sp" />
+        <TextView
             android:visibility="gone"
             android:id="@+id/tv_menu2"
             android:layout_width="60dp"
@@ -98,8 +94,8 @@
             android:paddingEnd="16dp"
             android:text="验收"
             android:textColor="#FFFFFFFF"
-            android:textSize="14sp" />
-        <com.qmuiteam.qmui.widget.QMUIFontFitTextView
+            android:textSize="12sp" />
+        <TextView
             android:visibility="gone"
             android:id="@+id/tv_menu3"
             android:layout_width="60dp"
@@ -110,8 +106,8 @@
             android:paddingEnd="16dp"
             android:text="处理"
             android:textColor="#FFFFFFFF"
-            android:textSize="14sp" />
-        <com.qmuiteam.qmui.widget.QMUIFontFitTextView
+            android:textSize="12sp" />
+        <TextView
             android:visibility="gone"
             android:id="@+id/tv_menu4"
             android:layout_width="60dp"
@@ -122,8 +118,8 @@
             android:paddingEnd="16dp"
             android:text="归档"
             android:textColor="#FFFFFFFF"
-            android:textSize="14sp" />
-        <com.qmuiteam.qmui.widget.QMUIFontFitTextView
+            android:textSize="12sp" />
+        <TextView
             android:visibility="gone"
             android:id="@+id/tv_menu5"
             android:layout_width="60dp"
@@ -134,8 +130,8 @@
             android:paddingEnd="16dp"
             android:text="转让责任人"
             android:textColor="#FFFFFFFF"
-            android:textSize="14sp" />
-        <com.qmuiteam.qmui.widget.QMUIFontFitTextView
+            android:textSize="12sp" />
+        <TextView
             android:visibility="gone"
             android:id="@+id/tv_menu6"
             android:layout_width="60dp"
@@ -146,6 +142,6 @@
             android:paddingEnd="16dp"
             android:text="快速处理"
             android:textColor="#FFFFFFFF"
-            android:textSize="14sp" />
+            android:textSize="12sp" />
     </LinearLayout>
 </LinearLayout>

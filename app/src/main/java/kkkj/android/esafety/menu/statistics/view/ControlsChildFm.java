@@ -81,19 +81,16 @@ public class ControlsChildFm extends MvpBaseFragment<ControlsChildPresenter> imp
                 mPresenter.getTroubleCtrsPage(request);
             }
         });
-
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
         request.setPageIndex(PageIndex);
         request.setPageSize(PageSize);
         request.setQuery(menuValue);
         mPresenter.getTroubleCtrsPage(request);
     }
 
-
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
 
     @Override
     public void onComplete() {

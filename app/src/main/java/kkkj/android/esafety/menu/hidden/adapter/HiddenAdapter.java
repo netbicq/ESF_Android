@@ -5,10 +5,10 @@ import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
-import com.qmuiteam.qmui.widget.QMUIFontFitTextView;
 
 import java.util.List;
 
@@ -28,12 +28,12 @@ public class HiddenAdapter extends BaseQuickAdapter<APPTroubleCtrView, BaseViewH
         // 1负责人 处理 归档 转让责任人 快速处理
         // 2执行人 申请验收
         // 3验收人 验收
-        QMUIFontFitTextView tv_menu1 = helper.getView(R.id.tv_menu1);
-        QMUIFontFitTextView tv_menu2 = helper.getView(R.id.tv_menu2);
-        QMUIFontFitTextView tv_menu3 = helper.getView(R.id.tv_menu3);
-        QMUIFontFitTextView tv_menu4 = helper.getView(R.id.tv_menu4);
-        QMUIFontFitTextView tv_menu5 = helper.getView(R.id.tv_menu5);
-        QMUIFontFitTextView tv_menu6 = helper.getView(R.id.tv_menu6);
+        TextView tv_menu1 = helper.getView(R.id.tv_menu1);
+        TextView tv_menu2 = helper.getView(R.id.tv_menu2);
+        TextView tv_menu3 = helper.getView(R.id.tv_menu3);
+        TextView tv_menu4 = helper.getView(R.id.tv_menu4);
+        TextView tv_menu5 = helper.getView(R.id.tv_menu5);
+        TextView tv_menu6 = helper.getView(R.id.tv_menu6);
         LinearLayout ll_container = helper.getView(R.id.ll_container);
 
         if (item.getCuser() == 1) {

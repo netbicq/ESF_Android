@@ -75,19 +75,15 @@ public class TimeOutTaskFm extends MvpBaseFragment<TimeOutTaskPresenter> impleme
                 mPresenter.getTimeOutTask(request);
             }
         });
-
+        request.setPageIndex(PageIndex);
+        request.setPageSize(PageSize);
+        request.setQuery("");
+        mPresenter.getTimeOutTask(request);
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        if(NetUtils.checkNetWork())
-        {
-            request.setPageIndex(PageIndex);
-            request.setPageSize(PageSize);
-            request.setQuery("");
-            mPresenter.getTimeOutTask(request);
-        }
     }
 
 

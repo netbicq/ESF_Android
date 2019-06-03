@@ -28,6 +28,7 @@ public class DangerPointFm extends MvpBaseFragment<DangerPointPresenter> impleme
     List<StatisticsDangerLevel> mList;
 
     StatisticsPagerAdapter adapter;
+
     @Override
     protected int getLayout() {
         return R.layout.fm_dangerpoint;
@@ -36,10 +37,6 @@ public class DangerPointFm extends MvpBaseFragment<DangerPointPresenter> impleme
     @Override
     public void onResume() {
         super.onResume();
-        if(NetUtils.checkNetWork())
-        {
-            mPresenter.getDangerLevels(new GetDangerLevelsModel.Request());
-        }
     }
 
     @Override
@@ -55,6 +52,7 @@ public class DangerPointFm extends MvpBaseFragment<DangerPointPresenter> impleme
         tabLayout.setupWithViewPager(vp);
         adapter = new StatisticsPagerAdapter(getChildFragmentManager());
         vp.setAdapter(adapter);
+        mPresenter.getDangerLevels(new GetDangerLevelsModel.Request());
     }
 
     @Override
@@ -62,21 +60,18 @@ public class DangerPointFm extends MvpBaseFragment<DangerPointPresenter> impleme
         mList.clear();
         mList.addAll(data);
         fragments.clear();
-        if(mList.size()>3)
-        {
+        if (mList.size() > 3) {
             tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
-        }
-        else {
+        } else {
             tabLayout.setTabMode(TabLayout.MODE_FIXED);
         }
-        for(int i = 0 ;i<mList.size();i++)
-        {
+        for (int i = 0; i < mList.size(); i++) {
             fragments.add(DangerPointChildFm.getInstance(mList.get(i).getLevelID()));
         }
         adapter.notifyDataSetChanged();
     }
-    private class StatisticsPagerAdapter extends FragmentPagerAdapter
-    {
+
+    private class StatisticsPagerAdapter extends FragmentPagerAdapter {
 
         public StatisticsPagerAdapter(FragmentManager fm) {
             super(fm);
@@ -95,7 +90,7 @@ public class DangerPointFm extends MvpBaseFragment<DangerPointPresenter> impleme
         @Nullable
         @Override
         public CharSequence getPageTitle(int position) {
-            return mList.get(position).getLevelName()+"("+mList.get(position).getCount()+")";
+            return mList.get(position).getLevelName() + "(" + mList.get(position).getCount() + ")";
         }
     }
 }

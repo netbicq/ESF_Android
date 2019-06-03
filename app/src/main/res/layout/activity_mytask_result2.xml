@@ -423,7 +423,7 @@
                             android:layout_height="wrap_content"
                             android:paddingTop="10dp"
                             android:paddingBottom="10dp"
-                            android:text="LSD_S"
+                            android:text="LSD_L"
                             android:textSize="15sp" />
 
                         <TextView
@@ -459,7 +459,7 @@
                             android:layout_height="wrap_content"
                             android:paddingTop="10dp"
                             android:paddingBottom="10dp"
-                            android:text="LSD_C"
+                            android:text="LSD_S"
                             android:textSize="15sp" />
 
                         <TextView

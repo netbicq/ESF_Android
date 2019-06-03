@@ -12,14 +12,14 @@
             android:id="@+id/tv_left1"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:textSize="14sp"
+            style="@style/BaseTextViewStyle"
             android:gravity="center|start"
             android:layout_height="match_parent" />
         <TextView
             android:id="@+id/tv_right1"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:textSize="14sp"
+            style="@style/BaseTextViewStyle"
             android:gravity="center|end"
             android:layout_height="match_parent" />
     </LinearLayout>
@@ -34,14 +34,14 @@
             android:id="@+id/tv_left2"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:textSize="14sp"
+            style="@style/BaseTextViewStyle"
             android:gravity="center|start"
             android:layout_height="match_parent" />
         <TextView
             android:id="@+id/tv_right2"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:textSize="14sp"
+            style="@style/BaseTextViewStyle"
             android:gravity="center|end"
             android:layout_height="match_parent" />
     </LinearLayout>

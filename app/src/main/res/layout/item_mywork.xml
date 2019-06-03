@@ -19,8 +19,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="钻机设备巡检"
-                android:textColor="#000000"
-                android:textSize="14sp" />
+                style="@style/BaseTextViewStyle" />
 
             <TextView
                 android:id="@+id/tv_date"
@@ -28,8 +27,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:text="2018/11/24"
-                android:textColor="#000000"
-                android:textSize="14sp" />
+                style="@style/BaseTextViewStyle" />
         </LinearLayout>
 
         <TextView
@@ -39,8 +37,7 @@
             android:gravity="center|end"
             android:paddingRight="20dp"
             android:text=""
-            android:textColor="#000000"
-            android:textSize="14sp" />
+            style="@style/BaseTextViewStyle" />
     </LinearLayout>
     <View
         android:layout_width="match_parent"

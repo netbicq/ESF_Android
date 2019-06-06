@@ -70,7 +70,7 @@ public class GetSubjectsModel extends MvpModel<GetSubjectsModel.Request, GetSubj
                                         {
                                             response.getData().get(i).setState(1);
                                         }
-                                        response.getData().get(i).saveOrUpdate("KeyID = ?", response.getData().get(i).getKeyID());
+                                        response.getData().get(i).saveOrUpdateAsync("KeyID = ?", response.getData().get(i).getKeyID());
                                     }
                                 }
 

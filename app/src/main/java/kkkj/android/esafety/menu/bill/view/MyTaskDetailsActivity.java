@@ -10,6 +10,7 @@ import android.view.View;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.flyco.tablayout.SegmentTabLayout;
 import com.flyco.tablayout.listener.OnTabSelectListener;
+import com.orhanobut.logger.Logger;
 import com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -22,6 +23,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import kkkj.android.esafety.R;
+import kkkj.android.esafety.bean.SubStandard;
 import kkkj.android.esafety.bean.Subject;
 import kkkj.android.esafety.bean.TaskSubjectView;
 import kkkj.android.esafety.customer.SlideRecyclerView;
@@ -75,8 +77,6 @@ public class MyTaskDetailsActivity extends MvpBaseActivity<MyTaskDetailsPresente
     protected void initMonitorAndData() {
         action_bar_title.setText("任务详情");
         btn_sub.setOnClickListener(this);
-
-
         mBillid = getIntent().getStringExtra("mBillid");
         mType = getIntent().getIntExtra("mType", 0);
         String[] mTitles = {"设备设施", "岗位", "作业"};
@@ -87,6 +87,7 @@ public class MyTaskDetailsActivity extends MvpBaseActivity<MyTaskDetailsPresente
         adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+
                 Intent intent = new Intent(mContext, TaskResultActivity.class);
                 if (mType == 0) {
                     intent.putExtra("subresultid", "");
@@ -98,6 +99,9 @@ public class MyTaskDetailsActivity extends MvpBaseActivity<MyTaskDetailsPresente
                 intent.putExtra("subjectType", mList.get(position).getSubType());
                 intent.putExtra("DangerID", mList.get(position).getDangerID());
                 intent.putExtra("IsControl", mList.get(position).isControl());
+                intent.putExtra("KeyID", mList.get(position).getKeyID());
+                intent.putExtra("LastResult", mList.get(position).getLastResult());
+
                 startActivity(intent);
             }
         });
@@ -141,12 +145,34 @@ public class MyTaskDetailsActivity extends MvpBaseActivity<MyTaskDetailsPresente
 
     @Override
     public void getsubjectsSuc(List<TaskSubjectView> data) {
+        for(int i = 0 ;i<data.size();i++)
+        {
+            for(int j = 0 ;j<data.get(i).getSubStandards().size();j++)
+            {
+                data.get(i).getSubStandards().get(j).setKeyID(data.get(i).getKeyID());
+                data.get(i).getSubStandards().get(j).
+                        saveOrUpdateAsync("KeyID = ? and SubStandardID = ?",data.get(i).getKeyID(),
+                                data.get(i).getSubStandards().get(j).getSubStandardID());
+            }
+
+        }
         mData = data;
         initTab();
     }
 
     @Override
     public void gettasksuboverSuc(List<TaskSubjectView> data) {
+        for(int i = 0 ;i<data.size();i++)
+        {
+            for(int j = 0 ;j<data.get(i).getSubStandards().size();j++)
+            {
+                data.get(i).getSubStandards().get(j).setKeyID(data.get(i).getKeyID());
+                data.get(i).getSubStandards().get(j).
+                        saveOrUpdateAsync("KeyID = ? and SubStandardID = ?",data.get(i).getKeyID(),
+                                data.get(i).getSubStandards().get(j).getSubStandardID());
+            }
+
+        }
         mData = data;
         initTab();
     }

@@ -213,7 +213,10 @@ public class HiddenTroubleControlActivity extends MvpBaseActivity<HiddenTroubleP
     @Override
     public void onComplete() {
         super.onComplete();
-        smartRefreshLayout.finishRefresh();
+        if(smartRefreshLayout!=null)
+        {
+            smartRefreshLayout.finishRefresh();
+        }
     }
 
     @Override

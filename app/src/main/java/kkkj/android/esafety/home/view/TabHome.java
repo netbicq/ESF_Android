@@ -19,6 +19,7 @@ import com.uuzuche.lib_zxing.activity.CaptureActivity;
 import com.uuzuche.lib_zxing.activity.CodeUtils;
 
 import org.litepal.LitePal;
+import org.litepal.crud.callback.SaveCallback;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +32,7 @@ import kkkj.android.esafety.bean.DownloadData;
 import kkkj.android.esafety.bean.Emp;
 import kkkj.android.esafety.bean.EnumItem;
 import kkkj.android.esafety.bean.Org;
+import kkkj.android.esafety.bean.SubStandard;
 import kkkj.android.esafety.bean.TaskBillModel;
 import kkkj.android.esafety.bean.TaskSubjectView;
 import kkkj.android.esafety.bean.WHYSDict;
@@ -40,7 +42,6 @@ import kkkj.android.esafety.home.model.GetEmpTaskByQRCoderModel;
 import kkkj.android.esafety.home.presenter.TabHomePresenter;
 import kkkj.android.esafety.menu.bill.view.MyTaskBillActivity;
 import kkkj.android.esafety.menu.hidden.view.HiddenTroubleControlActivity;
-import kkkj.android.esafety.menu.institution.view.InstitutionActivity;
 import kkkj.android.esafety.menu.institution.view.InstitutionActivity2;
 import kkkj.android.esafety.menu.temptask.view.AddTemWorkActivity;
 import kkkj.android.esafety.menu.vedio.view.VideoMonitorListActivity;
@@ -99,7 +100,7 @@ public class TabHome extends MvpBaseFragment<TabHomePresenter> implements View.O
                     case "我的任务":
                         startActivity(new Intent(mContext, MyTaskActivity.class).putExtra("OverTimeTaskCount", OverTimeTaskCount));
                         break;
-                    case "我的单据":
+                    case "我的检查单":
                         //我的单据
                         startActivity(new Intent(mContext, MyTaskBillActivity.class));
                         break;
@@ -109,7 +110,7 @@ public class TabHome extends MvpBaseFragment<TabHomePresenter> implements View.O
                     case "临时任务":
                         startActivity(new Intent(mContext, AddTemWorkActivity.class));
                         break;
-                    case "风险公示":
+                    case "公示公告":
                         //制度和预案
                         startActivity(new Intent(mContext, InstitutionActivity2.class));
                         break;
@@ -176,7 +177,7 @@ public class TabHome extends MvpBaseFragment<TabHomePresenter> implements View.O
         menu1.setName("我的任务");
         menu1.setCount(OverTimeTaskCount);
         menu7.setImgId(R.drawable.ic27);
-        menu7.setName("我的单据");
+        menu7.setName("我的检查单");
         menu2.setImgId(R.drawable.ic5);
         menu2.setName("我的作业");
         menu3.setImgId(R.drawable.ic4);
@@ -185,7 +186,7 @@ public class TabHome extends MvpBaseFragment<TabHomePresenter> implements View.O
         menu4.setImgId(R.drawable.ic34);
         menu4.setName("风控点扫描");
         menu5.setImgId(R.drawable.ic9);
-        menu5.setName("风险公示");
+        menu5.setName("公示公告");
         menu6.setImgId(R.drawable.ic10);
         menu6.setName("视频监控");
         menu8.setImgId(R.drawable.ic36);
@@ -216,16 +217,16 @@ public class TabHome extends MvpBaseFragment<TabHomePresenter> implements View.O
         if (data != null) {
             OverTimeTaskCount = data.getOverTimeTaskCount();
             menuList.get(0).setCount(OverTimeTaskCount);
+            menuList.get(1).setCount(data.getBillDatas().size());
             adapter.notifyDataSetChanged();
             LitePal.deleteAll(TaskBillModel.class);
             LitePal.deleteAll(TaskSubjectView.class);
-
+            LitePal.deleteAll(SubStandard.class);
             LitePal.deleteAll(Dict.class);
             LitePal.deleteAll(DangerLevelDict.class);
             LitePal.deleteAll(EnumItem.class);
             LitePal.deleteAll(Emp.class);
             LitePal.deleteAll(Org.class);
-
             for (int i = 0; i < data.getBillDatas().size(); i++) {
                 TaskBillModel taskBillModel = new TaskBillModel();
                 taskBillModel.setBillID(data.getBillDatas().get(i).getBillID());
@@ -237,107 +238,253 @@ public class TabHome extends MvpBaseFragment<TabHomePresenter> implements View.O
                 taskBillModel.setSubCheckedCount(data.getBillDatas().get(i).getSubCheckedCount());
                 taskBillModel.setSubCount(data.getBillDatas().get(i).getSubCount());
                 taskBillModel.setTaskName(data.getBillDatas().get(i).getTaskName());
-                taskBillModel.saveOrUpdate("BillID = ?", data.getBillDatas().get(i).getBillID());
+                int finalI = i;
+                taskBillModel.saveOrUpdateAsync("BillID = ?", data.getBillDatas().get(i).getBillID()).listen(new SaveCallback() {
+                    @Override
+                    public void onFinish(boolean success) {
+                        if(success)
+                        {
+                            for (int j = 0; j < data.getBillDatas().get(finalI).getCheckSubs().size(); j++) {
+                                TaskSubjectView taskSubjectView = new TaskSubjectView();
+                                taskSubjectView.setDangerName(data.getBillDatas().get(finalI).getCheckSubs().get(j).getDangerName());
+                                taskSubjectView.setDangerID(data.getBillDatas().get(finalI).getCheckSubs().get(j).getDangerID());
+                                taskSubjectView.setBillID(data.getBillDatas().get(finalI).getCheckSubs().get(j).getBillID());
+                                taskSubjectView.setDangerLevel(data.getBillDatas().get(finalI).getCheckSubs().get(j).getDangerLevel());
+                                taskSubjectView.setKeyID(data.getBillDatas().get(finalI).getCheckSubs().get(j).getKeyID());
+                                taskSubjectView.setPrincipal(data.getBillDatas().get(finalI).getCheckSubs().get(j).getPrincipal());
+                                taskSubjectView.setPrincipalTel(data.getBillDatas().get(finalI).getCheckSubs().get(j).getPrincipalTel());
+                                taskSubjectView.setSubID(data.getBillDatas().get(finalI).getCheckSubs().get(j).getSubID());
+                                taskSubjectView.setSubName(data.getBillDatas().get(finalI).getCheckSubs().get(j).getSubName());
+                                taskSubjectView.setSubResultID(data.getBillDatas().get(finalI).getCheckSubs().get(j).getSubResultID());
+                                taskSubjectView.setSubType(data.getBillDatas().get(finalI).getCheckSubs().get(j).getSubType());
+                                taskSubjectView.setSubTypeName(data.getBillDatas().get(finalI).getCheckSubs().get(j).getSubTypeName());
+                                taskSubjectView.setControl(data.getBillDatas().get(finalI).getCheckSubs().get(j).isControl());
+                                taskSubjectView.setSubStandards(data.getBillDatas().get(finalI).getCheckSubs().get(j).getSubStandards());
+                                taskSubjectView.saveOrUpdateAsync("KeyID = ?", data.getBillDatas().get(finalI).getCheckSubs().get(j).getKeyID())
+                                        .listen(new SaveCallback() {
+                                            @Override
+                                            public void onFinish(boolean success) {
+                                                if(!success)
+                                                {
+                                                    showErr("保存数据库出错TaskSubjectView");
+                                                }
+                                            }
+                                        });
+                            }
+                            for (int j = 0; j < data.getBillDatas().get(finalI).getWHYSDicts().size(); j++) {
+                                WHYSDict whysDict = new WHYSDict();
+                                whysDict.setBillID(data.getBillDatas().get(finalI).getBillID());
+                                whysDict.setDictName(data.getBillDatas().get(finalI).getWHYSDicts().get(j).getDictName());
+                                whysDict.setKeyID(data.getBillDatas().get(finalI).getWHYSDicts().get(j).getKeyID());
+                                whysDict.setMaxValue(data.getBillDatas().get(finalI).getWHYSDicts().get(j).getMaxValue());
+                                whysDict.setMinValue(data.getBillDatas().get(finalI).getWHYSDicts().get(j).getMinValue());
+                                whysDict.saveOrUpdateAsync("KeyID = ? and BillID=?",data.getBillDatas().get(finalI).getWHYSDicts().get(j).getKeyID(),data.getBillDatas().get(finalI).getBillID()).listen(new SaveCallback() {
+                                    @Override
+                                    public void onFinish(boolean success) {
+                                        if(!success)
+                                        {
+                                            showErr("保存数据库出错WHYSDict");
+                                        }
+                                    }
+                                });
+                                Logger.d("--------------------"+whysDict.getDictName());
+                            }
+                        }
+                        else {
+                            showErr("保存数据库出错TaskBillModel");
+                        }
+                    }
+                });
 
-                for (int j = 0; j < data.getBillDatas().get(i).getCheckSubs().size(); j++) {
-                    TaskSubjectView taskSubjectView = new TaskSubjectView();
-                    taskSubjectView.setDangerName(data.getBillDatas().get(i).getCheckSubs().get(j).getDangerName());
-                    taskSubjectView.setDangerID(data.getBillDatas().get(i).getCheckSubs().get(j).getDangerID());
-                    taskSubjectView.setBillID(data.getBillDatas().get(i).getCheckSubs().get(j).getBillID());
-                    taskSubjectView.setDangerLevel(data.getBillDatas().get(i).getCheckSubs().get(j).getDangerLevel());
-                    taskSubjectView.setKeyID(data.getBillDatas().get(i).getCheckSubs().get(j).getKeyID());
-                    taskSubjectView.setPrincipal(data.getBillDatas().get(i).getCheckSubs().get(j).getPrincipal());
-                    taskSubjectView.setPrincipalTel(data.getBillDatas().get(i).getCheckSubs().get(j).getPrincipalTel());
-                    taskSubjectView.setSubID(data.getBillDatas().get(i).getCheckSubs().get(j).getSubID());
-                    taskSubjectView.setSubName(data.getBillDatas().get(i).getCheckSubs().get(j).getSubName());
-                    taskSubjectView.setSubResultID(data.getBillDatas().get(i).getCheckSubs().get(j).getSubResultID());
-                    taskSubjectView.setSubType(data.getBillDatas().get(i).getCheckSubs().get(j).getSubType());
-                    taskSubjectView.setSubTypeName(data.getBillDatas().get(i).getCheckSubs().get(j).getSubTypeName());
-                    taskSubjectView.setControl(data.getBillDatas().get(i).getCheckSubs().get(j).isControl());
-                    taskSubjectView.saveOrUpdate("KeyID = ?", data.getBillDatas().get(i).getCheckSubs().get(j).getKeyID());
-                }
-                for (int j = 0; j < data.getBillDatas().get(i).getWHYSDicts().size(); j++) {
-                    WHYSDict whysDict = new WHYSDict();
-                    whysDict.setBillID(data.getBillDatas().get(i).getBillID());
-                    whysDict.setDictName(data.getBillDatas().get(i).getWHYSDicts().get(j).getDictName());
-                    whysDict.setKeyID(data.getBillDatas().get(i).getWHYSDicts().get(j).getKeyID());
-                    whysDict.setMaxValue(data.getBillDatas().get(i).getWHYSDicts().get(j).getMaxValue());
-                    whysDict.setMinValue(data.getBillDatas().get(i).getWHYSDicts().get(j).getMinValue());
-                    whysDict.saveOrUpdate("KeyID = ? and BillID=?",data.getBillDatas().get(i).getWHYSDicts().get(j).getKeyID(),data.getBillDatas().get(i).getBillID());
-                    Logger.d("--------------------"+whysDict.getDictName());
-                }
+
             }
             for(int i = 0 ;i<data.getLECD_Ls().size();i++)
             {
                 data.getLECD_Ls().get(i).setName("LECD_Ls");
-                data.getLECD_Ls().get(i).saveOrUpdate("KeyID=?",data.getLECD_Ls().get(i).getKeyID());
+                data.getLECD_Ls().get(i).saveOrUpdateAsync("KeyID=?",data.getLECD_Ls().get(i).getKeyID()).listen(new SaveCallback() {
+                    @Override
+                    public void onFinish(boolean success) {
+                        if(!success)
+                        {
+                            showErr("保存数据库出错LECD_Ls");
+                        }
+                    }
+                });
             }
             for(int i = 0 ;i<data.getLECD_Es().size();i++)
             {
                 data.getLECD_Es().get(i).setName("LECD_Es");
-                data.getLECD_Es().get(i).saveOrUpdate("KeyID=?",data.getLECD_Es().get(i).getKeyID());
+                data.getLECD_Es().get(i).saveOrUpdateAsync("KeyID=?",data.getLECD_Es().get(i).getKeyID())
+                .listen(new SaveCallback() {
+                    @Override
+                    public void onFinish(boolean success) {
+                        if(!success)
+                        {
+                            showErr("保存数据库出错LECD_Es");
+                        }
+                    }
+                });
             }
             for(int i = 0 ;i<data.getLECD_Cs().size();i++)
             {
                 data.getLECD_Cs().get(i).setName("LECD_Cs");
-                data.getLECD_Cs().get(i).saveOrUpdate("KeyID=?",data.getLECD_Cs().get(i).getKeyID());
+                data.getLECD_Cs().get(i).saveOrUpdateAsync("KeyID=?",data.getLECD_Cs().get(i).getKeyID())
+                .listen(new SaveCallback() {
+                    @Override
+                    public void onFinish(boolean success) {
+                        if(!success)
+                        {
+                            showErr("保存数据库出错LECD_Cs");
+                        }
+                    }
+                });
             }
             for(int i = 0 ;i<data.getLSD_Ls().size();i++)
             {
                 data.getLSD_Ls().get(i).setName("LSD_Ls");
-                data.getLSD_Ls().get(i).saveOrUpdate("KeyID=?",data.getLSD_Ls().get(i).getKeyID());
+                data.getLSD_Ls().get(i).saveOrUpdateAsync("KeyID=?",data.getLSD_Ls().get(i).getKeyID())
+                .listen(new SaveCallback() {
+                    @Override
+                    public void onFinish(boolean success) {
+                        if(!success)
+                        {
+                            showErr("保存数据库出错LSD_Ls");
+                        }
+                    }
+                });
             }
             for(int i = 0 ;i<data.getLSD_Ss().size();i++)
             {
                 data.getLSD_Ss().get(i).setName("LSD_Ss");
-                data.getLSD_Ss().get(i).saveOrUpdate("KeyID=?",data.getLSD_Ss().get(i).getKeyID());
+                data.getLSD_Ss().get(i).saveOrUpdateAsync("KeyID=?",data.getLSD_Ss().get(i).getKeyID())
+                .listen(new SaveCallback() {
+                    @Override
+                    public void onFinish(boolean success) {
+                        if(!success)
+                        {
+                            showErr("保存数据库出错LSD_Ss");
+                        }
+                    }
+                });
             }
-
             for(int i = 0 ;i<data.getSGLXDicts().size();i++)
             {
-                data.getSGLXDicts().get(i).setName("SGLX");
-                data.getSGLXDicts().get(i).saveOrUpdate("KeyID=?",data.getSGLXDicts().get(i).getKeyID());
-            }
 
+                data.getSGLXDicts().get(i).setName("SGLX");
+                data.getSGLXDicts().get(i).saveOrUpdateAsync("KeyID=?",data.getSGLXDicts().get(i).getKeyID())
+                .listen(new SaveCallback() {
+                    @Override
+                    public void onFinish(boolean success) {
+                        if(!success)
+                        {
+                            showErr("保存数据库出错SGLX");
+                        }
+                    }
+                });
+            }
             for(int i = 0 ;i<data.getSGHGDicts().size();i++)
             {
                 data.getSGHGDicts().get(i).setName("SGHG");
-                data.getSGHGDicts().get(i).saveOrUpdate("KeyID=?",data.getSGHGDicts().get(i).getKeyID());
+                data.getSGHGDicts().get(i).saveOrUpdateAsync("KeyID=?",data.getSGHGDicts().get(i).getKeyID())
+                .listen(new SaveCallback() {
+                    @Override
+                    public void onFinish(boolean success) {
+                        if(!success)
+                        {
+                            showErr("保存数据库出错SGHG");
+                        }
+                    }
+                });
             }
 
             for(int i = 0 ;i<data.getYXFWDicts().size();i++)
             {
                 data.getYXFWDicts().get(i).setName("YXFW");
-                data.getYXFWDicts().get(i).saveOrUpdate("KeyID=?",data.getYXFWDicts().get(i).getKeyID());
+                data.getYXFWDicts().get(i).saveOrUpdateAsync("KeyID=?",data.getYXFWDicts().get(i).getKeyID())
+                .listen(new SaveCallback() {
+                    @Override
+                    public void onFinish(boolean success) {
+                        if(!success)
+                        {
+                            showErr("保存数据库出错YXFW");
+                        }
+                    }
+                });
             }
 
             for(int i = 0 ;i<data.getDangerLevels().size();i++)
             {
-                data.getDangerLevels().get(i).saveOrUpdate("KeyID=?",data.getDangerLevels().get(i).getKeyID());
+                data.getDangerLevels().get(i).saveOrUpdateAsync("KeyID=?",data.getDangerLevels().get(i).getKeyID())
+                .listen(new SaveCallback() {
+                    @Override
+                    public void onFinish(boolean success) {
+                        if(!success)
+                        {
+                            showErr("保存数据库出错DangerLevels");
+                        }
+                    }
+                });
             }
 
 
             for(int i = 0 ;i<data.getEvaluateMethod().size();i++)
             {
-                data.getEvaluateMethod().get(i).saveOrUpdate("Value=?",data.getEvaluateMethod().get(i).getValue()+"");
+                data.getEvaluateMethod().get(i).saveOrUpdateAsync("Value=?",data.getEvaluateMethod().get(i).getValue()+"")
+                .listen(new SaveCallback() {
+                    @Override
+                    public void onFinish(boolean success) {
+                        if(!success)
+                        {
+                            showErr("保存数据库出错EvaluateMethod");
+                        }
+                    }
+                });
             }
 
             for(int i = 0 ;i<data.getTroubleLevels().size();i++)
             {
                 data.getTroubleLevels().get(i).setName("TroubleLevel");
-                data.getTroubleLevels().get(i).saveOrUpdate("KeyID=?",data.getTroubleLevels().get(i).getKeyID());
+                data.getTroubleLevels().get(i).saveOrUpdateAsync("KeyID=?",data.getTroubleLevels().get(i).getKeyID())
+                .listen(new SaveCallback() {
+                    @Override
+                    public void onFinish(boolean success) {
+                        if(!success)
+                        {
+                            showErr("保存数据库出错TroubleLevel");
+                        }
+                    }
+                });
             }
 
             for(int i = 0 ;i<data.getEmps().size();i++)
             {
-                data.getEmps().get(i).saveOrUpdate("KeyID=?",data.getEmps().get(i).getKeyID());
+                data.getEmps().get(i).saveOrUpdateAsync("KeyID=?",data.getEmps().get(i).getKeyID()).listen(new SaveCallback() {
+                    @Override
+                    public void onFinish(boolean success) {
+                        if(!success)
+                        {
+                            showErr("保存数据库出错Emps");
+                        }
+                    }
+                });
             }
 
             for(int i = 0 ;i<data.getOrgs().size();i++)
             {
-                data.getOrgs().get(i).saveOrUpdate("KeyID=?",data.getOrgs().get(i).getKeyID());
+                data.getOrgs().get(i).saveOrUpdateAsync("KeyID=?",data.getOrgs().get(i).getKeyID())
+                .listen(new SaveCallback() {
+                    @Override
+                    public void onFinish(boolean success) {
+                        if(!success)
+                        {
+                            showErr("保存数据库出错Orgs");
+                        }
+                    }
+                });
             }
         }
+
+
         onComplete();
     }
 

@@ -241,7 +241,7 @@ public class Subject extends LitePalSupport{
     public void setAttachFiles(List<AttachFileNew> attachFiles) {
         for(int i = 0 ;i<attachFiles.size();i++)
         {
-            attachFiles.get(i).saveOrUpdate("FileUrl = ?",attachFiles.get(i).getFileUrl());
+            attachFiles.get(i).saveOrUpdateAsync("FileUrl = ?",attachFiles.get(i).getFileUrl());
         }
     }
 

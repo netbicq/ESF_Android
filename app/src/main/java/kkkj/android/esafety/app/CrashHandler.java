@@ -40,7 +40,7 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        restartApp();
+//        restartApp();
     }
 
     /**

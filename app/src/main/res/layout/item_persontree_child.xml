@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:visibility="invisible"
             android:src="@drawable/ic_keyboard_arrow_right_white_24px" />
-        <TextView
+        <CheckBox
             android:id="@+id/name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

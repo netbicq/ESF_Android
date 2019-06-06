@@ -20,7 +20,6 @@
 
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
-
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
     <application
         android:name=".app.ESafety"
@@ -113,6 +112,9 @@
         <activity android:name=".home.view.TaskScanningActivity" />
         <activity android:name=".common.getpic.PhotoViewActivity" />
         <activity android:name=".menu.institution.view.InstitutionActivity2" />
+        <activity android:name=".menu.bill.view.ViewStandardActivity" />
+        <activity android:name=".menu.temptask.view.ChooseSubjectActivity" />
+        <activity android:name=".common.pickdangerpoint.PickDangersActivity" />
     </application>
 
 </manifest>

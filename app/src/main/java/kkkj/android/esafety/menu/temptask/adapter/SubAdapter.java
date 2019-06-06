@@ -21,7 +21,8 @@ public class SubAdapter extends BaseQuickAdapter<SubjectSelectModel, BaseViewHol
         helper.setText(R.id.SubTypeName,item.getSubTypeName());
 //        helper.setText(R.id.EntityTypeName,item.getEntityTypeName());
 //        helper.setText(R.id.SubName,item.getEntity().getSubName());
-        helper.setText(R.id.EntityTypeName,item.getEntity().getSubName());
+        helper.setText(R.id.SubName,item.getEntityTypeName());
+//        helper.setText(R.id.EntityTypeName,item.getEntity().getEntityTypeName());
         View line  = helper.getView(R.id.line);
 
         helper.addOnClickListener(R.id.ll_delete) ;

@@ -52,7 +52,7 @@ public class GetTaskBillsOverModel extends MvpModel<GetTaskBillsOverModel.Reques
                             if (response.getState() == RESPONSE_OK) {
                                 if (response.getData().size() > 0) {
                                     for (int i = 0; i < response.getData().size(); i++) {
-                                        response.getData().get(i).saveOrUpdate("BillID = ?", response.getData().get(i).getBillID());
+                                        response.getData().get(i).saveOrUpdateAsync("BillID = ?", response.getData().get(i).getBillID());
                                     }
                                 }
                                 callback.onSuccess(response);

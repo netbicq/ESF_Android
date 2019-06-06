@@ -135,7 +135,7 @@ public class CurrentDocFragment extends MvpBaseFragment<CurrentDocFPresenter> im
                 whysDict.setKeyID(data.get(i).getWHYSDicts().get(j).getKeyID());
                 whysDict.setMaxValue(data.get(i).getWHYSDicts().get(j).getMaxValue());
                 whysDict.setMinValue(data.get(i).getWHYSDicts().get(j).getMinValue());
-                whysDict.saveOrUpdate("KeyID = ? and BillID=?",whysDict.getKeyID(),whysDict.getBillID());
+                whysDict.saveOrUpdateAsync("KeyID = ? and BillID=?",whysDict.getKeyID(),whysDict.getBillID());
                 Logger.d("--------------------"+whysDict.getDictName());
             }
         }

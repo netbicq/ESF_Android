@@ -3,6 +3,7 @@ package kkkj.android.esafety.menu.temptask.view;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -20,6 +21,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.orhanobut.logger.Logger;
 import com.tencent.smtt.sdk.TbsVideo;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -28,6 +30,7 @@ import java.util.List;
 import butterknife.BindView;
 import kkkj.android.esafety.R;
 import kkkj.android.esafety.bean.AttachFileNew;
+import kkkj.android.esafety.bean.CSub;
 import kkkj.android.esafety.bean.InspectTaskSubjectNew;
 import kkkj.android.esafety.bean.Sub;
 import kkkj.android.esafety.bean.SubjectSelectModel;
@@ -35,6 +38,7 @@ import kkkj.android.esafety.bean.TempTaskSelector;
 import kkkj.android.esafety.common.getpic.GetPicModel;
 import kkkj.android.esafety.common.getpic.GetPicOrMP4Activity;
 import kkkj.android.esafety.common.getpic.PhotoViewActivity;
+import kkkj.android.esafety.common.pickdangerpoint.PickDangersActivity;
 import kkkj.android.esafety.customer.MyOptionsPicker;
 import kkkj.android.esafety.customer.MyTimePicker;
 import kkkj.android.esafety.menu.bill.adapter.PicOrMp4Adapter;
@@ -59,8 +63,8 @@ public class AddTemWorkActivity extends MvpBaseActivity<AddTemWorkPresenter> imp
     @BindView(R.id.ll_post)
     LinearLayout ll_post;
 
-    @BindView(R.id.ll_subjectType)
-    LinearLayout ll_subjectType;
+//    @BindView(R.id.ll_subjectType)
+//    LinearLayout ll_subjectType;
 
     @BindView(R.id.tv_danger)
     TextView tv_danger;
@@ -75,8 +79,8 @@ public class AddTemWorkActivity extends MvpBaseActivity<AddTemWorkPresenter> imp
     @BindView(R.id.tv_subject)
     TextView tv_subject;
 
-    @BindView(R.id.tv_subjectType)
-    TextView tv_subjectType;
+//    @BindView(R.id.tv_subjectType)
+//    TextView tv_subjectType;
 
     @BindView(R.id.ed_content)
     EditText ed_content;
@@ -95,7 +99,7 @@ public class AddTemWorkActivity extends MvpBaseActivity<AddTemWorkPresenter> imp
 
     OptionsPickerView SubPicker, PostPicker, DangersPicker, SubTypesPicker;
     List<SubjectSelectModel> mList;
-    List<Sub> Subs = new ArrayList<>();
+    List<CSub> CSubs = new ArrayList<>();
     List<TempTaskSelector.Danger> Dangers = new ArrayList<>();
     List<TempTaskSelector.SubType> SubTypes = new ArrayList<>();
     List<TempTaskSelector.Post> Posts = new ArrayList<>();
@@ -131,7 +135,7 @@ public class AddTemWorkActivity extends MvpBaseActivity<AddTemWorkPresenter> imp
         ll_post.setOnClickListener(this);
         ll_subject.setOnClickListener(this);
         tv_addFile.setOnClickListener(this);
-        ll_subjectType.setOnClickListener(this);
+//        ll_subjectType.setOnClickListener(this);
         request = new AddTempTaskModel.Request();
         request2 = new GetDangerSelectorModel.Request();
         action_bar_right.setOnClickListener(new View.OnClickListener() {
@@ -173,7 +177,7 @@ public class AddTemWorkActivity extends MvpBaseActivity<AddTemWorkPresenter> imp
                     List<InspectTaskSubjectNew> taskSubjects = new ArrayList<>();
                     for (int i = 0; i < mList.size(); i++) {
                         InspectTaskSubjectNew inspectTaskSubjectNew = new InspectTaskSubjectNew();
-                        inspectTaskSubjectNew.setSubjectType(request2.getSubType());
+                        inspectTaskSubjectNew.setSubjectType(mList.get(i).getSubjectType());
                         inspectTaskSubjectNew.setSubjectID(mList.get(i).getSubjectID());
                         inspectTaskSubjectNew.setDangerID(mList.get(i).getDangerID());
                         taskSubjects.add(inspectTaskSubjectNew);
@@ -248,7 +252,7 @@ public class AddTemWorkActivity extends MvpBaseActivity<AddTemWorkPresenter> imp
                         }
                         break;
                     case R.id.iv_delete:
-                        mList.remove(position);
+                        picOrMp4List.remove(position);
                         picOrMp4Adapter.notifyDataSetChanged();
                         break;
                 }
@@ -256,27 +260,27 @@ public class AddTemWorkActivity extends MvpBaseActivity<AddTemWorkPresenter> imp
         });
         recyclerview2.setAdapter(picOrMp4Adapter);
         recyclerview2.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false));
+        mPresenter.getselector();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        mPresenter.getselector();
     }
 
     @Override
     public void onClick(View v) {
         MyTimePicker myTimePicker = new MyTimePicker();
         switch (v.getId()) {
-            case R.id.ll_subjectType:
-                if(SubTypes.size() > 0)
-                {
-                    SubTypesPicker.show();
-                }
-                else {
-                    showToast("获取主体类型失败");
-                }
-                break;
+//            case R.id.ll_subjectType:
+//                if(SubTypes.size() > 0)
+//                {
+//                    SubTypesPicker.show();
+//                }
+//                else {
+//                    showToast("获取主体类型失败");
+//                }
+//                break;
             case R.id.tv_addFile:
                 getPermissions();
                 break;
@@ -289,7 +293,6 @@ public class AddTemWorkActivity extends MvpBaseActivity<AddTemWorkPresenter> imp
                 else {
                     showToast("获取风险点失败");
                 }
-
                 break;
             case R.id.ll_startt:
                 StartTimePicker = myTimePicker.getPicker(mContext, new OnTimeSelectListener() {
@@ -316,16 +319,12 @@ public class AddTemWorkActivity extends MvpBaseActivity<AddTemWorkPresenter> imp
                 break;
             case R.id.ll_subject:
                 //主体选择
-                if(Subs.size()>0)
+                if(CSubs.size()>0)
                 {
-                    SubPicker.show();
+                    startActivityForResult(new Intent(mContext, PickDangersActivity.class).putExtra("CSubs", (Serializable) CSubs),201);
                 }
                 else {
-                    if(request2.getSubType()==0)
-                    {
-                        showToast("请先选择主体类型");
-                    }
-                    else if(TextUtils.isEmpty(request2.getDangerPointID()))
+                    if(TextUtils.isEmpty(request2.getDangerPointID()))
                     {
                         showToast("请先选择风险点");
                     }
@@ -361,66 +360,32 @@ public class AddTemWorkActivity extends MvpBaseActivity<AddTemWorkPresenter> imp
         if (TextUtils.isEmpty(request2.getDangerPointID())) {
             return;
         }
-
-        if (request2.getSubType() == 0) {
-            return;
-        }
-        Logger.d(request2.getSubType() +"--"+request2.getDangerPointID()+"---");
         mPresenter.getdangerselector(request2);
     }
 
     @Override
     public void getdangerselectorSuc(GetDangerSelectorModel.Response response) {
 //初始化主体选择器
-        Subs = response.getData();
-        initJsonData();
-        MyOptionsPicker picker = new MyOptionsPicker();
-        SubPicker = picker.getPicker(mContext, "主体选择", new OnOptionsSelectListener() {
-            @Override
-            public void onOptionsSelect(int options1, int options2, int options3, View v) {
-//                tv_subject.setText(Subs.get(options1).getSubjects().get(options2).getEntities().get(options3).getSubName());
-//                request.setTaskSubjects();
-                if (Subs.size() > 0) {
-                    if (Subs.get(options1).getDangers().size() > 0) {
-                        SubjectSelectModel subjectSelectModel = new SubjectSelectModel();
-                        subjectSelectModel.setSubTypeName(Subs.get(options1).getSubName());
-
-                        subjectSelectModel.setDangerID(Subs.get(options1).getDangers().get(options2).getDangerID());
-                        subjectSelectModel.setSubjectID(Subs.get(options1).getSubID());
-
-                        subjectSelectModel.setEntityTypeName(Subs.get(options1).getDangers().get(options2).getDangerName());
-                        if (Subs.get(options1).getDangers().size() > 0) {
-//                            subjectSelectModel.setEntity(Subs.get(options1).getSubjects().get(options2).getEntities().get(options3));
-                            if (mList.contains(subjectSelectModel)) {
-                                showToast("不可重复添加相同主体");
-                            } else {
-                                mList.add(subjectSelectModel);
-                                adapter.notifyItemChanged(mList.size() - 1);
-                            }
-                        }
-                    }
-                }
-            }
-        });
-        SubPicker.setPicker(Subs, Subjects, null);
+        CSubs = response.getData();
+        mList.clear();
+        adapter.notifyDataSetChanged();
     }
 
     @Override
     public void getselectorSuc(GetSelectorModel.Response response) {
         MyOptionsPicker picker = new MyOptionsPicker();
         //初始化主体类型选择器
-        SubTypes = response.getData().getSubTypes();
-        SubTypesPicker = picker.getPicker(mContext, "主体类型选择", new OnOptionsSelectListener() {
-            @Override
-            public void onOptionsSelect(int options1, int options2, int options3, View v) {
-                if (SubTypes.size() > 0) {
-                    tv_subjectType.setText(SubTypes.get(options1).getSubTypeName());
-                    request2.setSubType(SubTypes.get(options1).getSubjectType());
-                    getdangerselector();
-                }
-            }
-        });
-        SubTypesPicker.setPicker(SubTypes, null, null);
+//        SubTypes = response.getData().getSubTypes();
+//        SubTypesPicker = picker.getPicker(mContext, "主体类型选择", new OnOptionsSelectListener() {
+//            @Override
+//            public void onOptionsSelect(int options1, int options2, int options3, View v) {
+//                if (SubTypes.size() > 0) {
+//                    tv_subjectType.setText(SubTypes.get(options1).getSubTypeName());
+//                    getdangerselector();
+//                }
+//            }
+//        });
+//        SubTypesPicker.setPicker(SubTypes, null, null);
 
         //初始化风险选择
         Dangers = response.getData().getDangers();
@@ -452,27 +417,6 @@ public class AddTemWorkActivity extends MvpBaseActivity<AddTemWorkPresenter> imp
         PostPicker.setPicker(Posts, null, null);
 
     }
-
-    private void initJsonData() {//解析数据
-
-        for (int i = 0; i < Subs.size(); i++) {//遍历省份
-            ArrayList<String> cityList = new ArrayList<>();//该省的城市列表（第二级）
-            ArrayList<ArrayList<TempTaskSelector.Sub.EntityType.Entity>> province_AreaList = new ArrayList<>();//该省的所有地区列表（第三极）
-            for (int c = 0; c < Subs.get(i).getDangers().size(); c++) {//遍历该省份的所有城市
-                String cityName = Subs.get(i).getDangers().get(c).getDangerName();
-                cityList.add(cityName);//添加城市
-            }
-
-            /**
-             * 添加城市数据
-             */
-            Subjects.add(cityList);
-
-            /**
-             * 添加地区数据
-             */
-        }
-    }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if (requestCode == 200) {
@@ -485,6 +429,13 @@ public class AddTemWorkActivity extends MvpBaseActivity<AddTemWorkPresenter> imp
 //                picOrMp4.setSubjectID(subjectID);
                 picOrMp4List.add(picOrMp4);
                 picOrMp4Adapter.notifyDataSetChanged();
+            }
+        }
+        else if(requestCode==201){
+            if (resultCode == Activity.RESULT_OK) {
+                mList.clear();
+                mList.addAll ((List<SubjectSelectModel>) data.getSerializableExtra("subjectSelectModels"));
+                adapter.notifyDataSetChanged();
             }
         }
     }

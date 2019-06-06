@@ -97,7 +97,7 @@ public class WorkDetailsAdapter extends BaseQuickAdapter<OpreateBillFlow, BaseVi
             line2.setVisibility(View.INVISIBLE);
         }
         tv_pointName.setText(item.getPointName());
-        tv_postName.setText(item.getPostName());
+        tv_postName.setText("执行岗位:"+item.getPostName());
         helper.setText(R.id.tv_index,item.getPointIndex()+"");
 
         //有执行结果的话 线就是绿色

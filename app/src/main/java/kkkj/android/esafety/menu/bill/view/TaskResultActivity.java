@@ -102,6 +102,8 @@ public class TaskResultActivity extends MvpBaseActivity<TaskResultPresenter> imp
     LinearLayout ll_evalLECD;
     @BindView(R.id.ll_evalLCD)
     LinearLayout ll_evalLCD;
+    @BindView(R.id.ll_look)
+    LinearLayout ll_look;
 
 
     List<GetPicModel> mList;
@@ -139,7 +141,9 @@ public class TaskResultActivity extends MvpBaseActivity<TaskResultPresenter> imp
 
     AddTaskSubjectModel.Request requestNew;
     int PickRequest = 102;
+    String TaskSubjectViewKeyID;
 
+    String LastResult;
     @Override
     protected int getLayout() {
         return R.layout.activity_mytask_result2;
@@ -152,11 +156,15 @@ public class TaskResultActivity extends MvpBaseActivity<TaskResultPresenter> imp
 
     @Override
     protected void initMonitorAndData() {
+
+
+
         SoftHideKeyBoardUtil.assistActivity(mActivity);
         action_bar_title.setText("任务检查结果");
         action_bar_right.setText("保存");
         action_bar_right.setOnClickListener(this);
         tv_addFile.setOnClickListener(this);
+        TaskSubjectViewKeyID= getIntent().getStringExtra("KeyID");
         subresultid = getIntent().getStringExtra("subresultid");
         subjectType = getIntent().getIntExtra("subjectType", 0);
         billID = getIntent().getStringExtra("billID");
@@ -164,6 +172,9 @@ public class TaskResultActivity extends MvpBaseActivity<TaskResultPresenter> imp
         DangerID = getIntent().getStringExtra("DangerID");
         requestNew = new AddTaskSubjectModel.Request();
         IsControl = getIntent().getBooleanExtra("IsControl", false);
+
+
+        LastResult= getIntent().getStringExtra("LastResult");
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
         tv_time.setEnabled(false);
         tv_time.setText(df.format(new Date()));
@@ -195,10 +206,12 @@ public class TaskResultActivity extends MvpBaseActivity<TaskResultPresenter> imp
             tv_danger.setEnabled(false);
             DangersPicker.setSelectOptions(2);
             tv_danger.setText(Dangers.get(2));
+            ed_describe.setText(LastResult+"");
             result = 3;
         } else {
             tv_danger.setEnabled(true);
         }
+        ll_look.setOnClickListener(this);
         tv_danger.setOnClickListener(this);
         tv_reason.setOnClickListener(this);
         tv_type.setOnClickListener(this);
@@ -274,7 +287,9 @@ public class TaskResultActivity extends MvpBaseActivity<TaskResultPresenter> imp
 //                spinner.setSelection(subjects.get(i).getTaskResult()+0);
                 tv_danger.setText(Dangers.get(subjects.get(i).getTaskResult() - 1) + "");
                 result = subjects.get(i).getTaskResult();
+
                 if (result == 2) {
+
                     initPickers();
                     ll_result.setVisibility(View.VISIBLE);
 
@@ -382,7 +397,6 @@ public class TaskResultActivity extends MvpBaseActivity<TaskResultPresenter> imp
                     requestNew.setLSD_S(subjects.get(i).getLSD_S());
                     requestNew.setLSD_L(subjects.get(i).getLSD_L());
                     requestNew.setDValue(subjects.get(i).getDValue());
-
                 }
 
                 if (subjects.get(i).getAttachFiles() != null) {
@@ -419,6 +433,16 @@ public class TaskResultActivity extends MvpBaseActivity<TaskResultPresenter> imp
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.ll_look:
+                if(!TextUtils.isEmpty(TaskSubjectViewKeyID))
+                {
+                    startActivity(new Intent(mContext,ViewStandardActivity.class).putExtra("TaskSubjectViewKeyID",TaskSubjectViewKeyID));
+                }
+                else {
+                    showErr("查询标准的ID为空");
+                }
+                break;
+
             case R.id.tv_evalLECD_C:
                 LECD_CsPicker.show();
                 break;

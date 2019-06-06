@@ -16,7 +16,28 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
+            <LinearLayout
+                android:id="@+id/ll_look"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center|start"
+                android:orientation="horizontal"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:text="查看检查标准"
+                    android:drawableRight="@drawable/ic15"
+                    android:textSize="15sp" />
+            </LinearLayout>
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#d2d2d2" />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

@@ -7,6 +7,7 @@ import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
+import kkkj.android.esafety.bean.CSub;
 import kkkj.android.esafety.bean.Sub;
 import kkkj.android.esafety.http.ESafetyRequest;
 import kkkj.android.esafety.http.ESafetyResponse;
@@ -46,9 +47,9 @@ public class GetDangerSelectorModel extends MvpModel<GetDangerSelectorModel.Requ
     }
 
     public static class Response extends ESafetyResponse {
-        List<Sub> data = new ArrayList<>();
+        List<CSub> data = new ArrayList<>();
 
-        public List<Sub> getData() {
+        public List<CSub> getData() {
             if(data==null)
             {
                 return new ArrayList<>();
@@ -56,14 +57,13 @@ public class GetDangerSelectorModel extends MvpModel<GetDangerSelectorModel.Requ
             return data;
         }
 
-        public void setData(List<Sub> data) {
+        public void setData(List<CSub> data) {
             this.data = data;
         }
     }
 
     public static class Request extends ESafetyRequest {
         String DangerPointID = "";
-        int SubType = 0;
 
         public String getDangerPointID() {
             if(DangerPointID==null)
@@ -73,17 +73,8 @@ public class GetDangerSelectorModel extends MvpModel<GetDangerSelectorModel.Requ
             }
             return DangerPointID;
         }
-
         public void setDangerPointID(String dangerPointID) {
             DangerPointID = dangerPointID;
-        }
-
-        public int getSubType() {
-            return SubType;
-        }
-
-        public void setSubType(int subType) {
-            SubType = subType;
         }
     }
 }

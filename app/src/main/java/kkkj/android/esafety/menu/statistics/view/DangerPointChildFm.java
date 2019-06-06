@@ -114,7 +114,11 @@ public class DangerPointChildFm extends MvpBaseFragment<DangerPointChildPresente
     @Override
     public void onComplete() {
         super.onComplete();
-        smartRefreshLayout.finishRefresh();
-        smartRefreshLayout.finishLoadMore();
+        if(smartRefreshLayout!=null)
+        {
+            smartRefreshLayout.finishRefresh();
+            smartRefreshLayout.finishLoadMore();
+        }
+
     }
 }

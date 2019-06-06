@@ -48,7 +48,7 @@ public class GetTaskSuboverModel extends MvpModel<GetTaskSuboverModel.Request, G
                             if (response.getState() == RESPONSE_OK) {
                                 if (response.getData().size() > 0) {
                                     for (int i = 0; i < response.getData().size(); i++) {
-                                        response.getData().get(i).saveOrUpdate("KeyID = ?", response.getData().get(i).getKeyID());
+                                        response.getData().get(i).saveOrUpdateAsync("KeyID = ?", response.getData().get(i).getKeyID());
                                     }
                                 }
                                 callback.onSuccess(response);

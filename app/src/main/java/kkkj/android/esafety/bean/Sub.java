@@ -2,13 +2,23 @@ package kkkj.android.esafety.bean;
 
 import com.contrarywind.interfaces.IPickerViewData;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Sub implements IPickerViewData {
+public class Sub implements IPickerViewData , Serializable {
     String SubName = "";
     String SubID = "";
     List<Danger> Dangers;
+    int SubTypeID;
+
+    public int getSubTypeID() {
+        return SubTypeID;
+    }
+
+    public void setSubTypeID(int subTypeID) {
+        SubTypeID = subTypeID;
+    }
 
     public String getSubName() {
         if(SubName==null)
@@ -51,10 +61,29 @@ public class Sub implements IPickerViewData {
         return getSubName();
     }
 
-    public class Danger implements IPickerViewData
+    public class Danger implements IPickerViewData,Serializable
     {
         String DangerID="";
+        String SubID="";
         String DangerName="";
+        boolean checked = false;
+
+
+        public String getSubID() {
+            return SubID;
+        }
+
+        public void setSubID(String subID) {
+            SubID = subID;
+        }
+
+        public boolean isChecked() {
+            return checked;
+        }
+
+        public void setChecked(boolean checked) {
+            this.checked = checked;
+        }
 
         public String getDangerID() {
             if(DangerID==null)

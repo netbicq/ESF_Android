@@ -30,7 +30,7 @@ public class ChildNodeViewBinder extends BaseNodeViewBinder {
     }
     @Override
     public int getLayoutId() {
-        return R.layout.item_persontree_child;
+        return R.layout.item_persontree_child2;
     }
 
     @Override

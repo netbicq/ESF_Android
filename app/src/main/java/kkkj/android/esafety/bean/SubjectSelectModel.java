@@ -1,6 +1,8 @@
 package kkkj.android.esafety.bean;
 
-public class SubjectSelectModel {
+import java.io.Serializable;
+
+public class SubjectSelectModel implements Serializable {
     int SubjectType = 0;
     String SubjectID = "";
     String DangerID = "";

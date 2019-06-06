@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton;
 
 import org.litepal.LitePal;
+import org.litepal.crud.callback.SaveCallback;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -85,7 +86,7 @@ public class NewBillDialog extends Dialog implements View.OnClickListener {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 jumpModel.setJump(isChecked);
-                jumpModel.saveOrUpdate("keyID = ?", keyID);
+                jumpModel.saveOrUpdateAsync("keyID = ?", keyID);
             }
         });
     }

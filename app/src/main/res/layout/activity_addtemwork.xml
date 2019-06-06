@@ -195,42 +195,42 @@
 
 
             </LinearLayout>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#d2d2d2" />
+            <!--<View-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="1dp"-->
+                <!--android:background="#d2d2d2" />-->
 
-            <LinearLayout
-                android:id="@+id/ll_subjectType"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:foreground="?android:attr/selectableItemBackground"
-                android:gravity="center|start"
-                android:orientation="horizontal"
-                android:padding="10dp">
+            <!--<LinearLayout-->
+                <!--android:id="@+id/ll_subjectType"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:foreground="?android:attr/selectableItemBackground"-->
+                <!--android:gravity="center|start"-->
+                <!--android:orientation="horizontal"-->
+                <!--android:padding="10dp">-->
 
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="主体类型"
-                    android:textColor="#000000"
-                    android:textSize="15sp" />
+                <!--<TextView-->
+                    <!--android:layout_width="0dp"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:text="主体类型"-->
+                    <!--android:textColor="#000000"-->
+                    <!--android:textSize="15sp" />-->
 
-                <TextView
-                    android:id="@+id/tv_subjectType"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="2"
-                    android:drawableRight="@drawable/ic15"
-                    android:drawablePadding="5dp"
-                    android:gravity="center|end"
-                    android:text="请选择"
-                    android:textColor="#000000"
-                    android:textSize="15sp" />
+                <!--<TextView-->
+                    <!--android:id="@+id/tv_subjectType"-->
+                    <!--android:layout_width="0dp"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_weight="2"-->
+                    <!--android:drawableRight="@drawable/ic15"-->
+                    <!--android:drawablePadding="5dp"-->
+                    <!--android:gravity="center|end"-->
+                    <!--android:text="请选择"-->
+                    <!--android:textColor="#000000"-->
+                    <!--android:textSize="15sp" />-->
 
 
-            </LinearLayout>
+            <!--</LinearLayout>-->
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"

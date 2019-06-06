@@ -5,6 +5,7 @@ import android.text.TextUtils;
 import com.orhanobut.logger.Logger;
 
 import org.litepal.LitePal;
+import org.litepal.crud.callback.SaveCallback;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -22,6 +23,7 @@ import kkkj.android.esafety.bean.Subject;
 import kkkj.android.esafety.bean.TaskSubjectView;
 import kkkj.android.esafety.http.ESafetyRequest;
 import kkkj.android.esafety.http.ESafetyResponse;
+import kkkj.android.esafety.http.ResultException;
 import kkkj.android.esafety.model.UpLoadFileModel;
 import kkkj.android.esafety.mvpInterface.MvpCallback;
 import kkkj.android.esafety.mvpInterface.MvpModel;
@@ -59,9 +61,19 @@ public class AddTaskSubjectModel extends MvpModel<AddTaskSubjectModel.Request, A
                 subject.setDValue(request.getDValue());
 
 
-                subject.saveOrUpdate("SubjectID = ? and BillID = ? and DangerID = ?", subject.getSubjectID(), subject.getBillID()
-                        , subject.getDangerID());
-                callback.onSuccess(new Response());
+                subject.saveOrUpdateAsync("SubjectID = ? and BillID = ? and DangerID = ?", subject.getSubjectID(), subject.getBillID()
+                        , subject.getDangerID()).listen(new SaveCallback() {
+                    @Override
+                    public void onFinish(boolean success) {
+                        if(success)
+                        {
+                            callback.onSuccess(new Response());
+                        }
+                       else {
+                            callback.onError(new ResultException(1000,"数据库错误"));
+                        }
+                    }
+                });
             } catch (Exception e) {
                 callback.onError(e);
             }

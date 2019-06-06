@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <litepal>
     <dbname value="ESafety" />
-    <version value="5" />
+    <version value="10" />
     <list>
         <mapping class="kkkj.android.esafety.bean.InsepctTaskByEmployee"/>
         <mapping class="kkkj.android.esafety.bean.TaskBillModel"/>
@@ -23,5 +23,6 @@
         <mapping class="kkkj.android.esafety.bean.Dict"/>
         <mapping class="kkkj.android.esafety.bean.DangerLevelDict"/>
         <mapping class="kkkj.android.esafety.bean.Eval_Dict"/>
+        <mapping class="kkkj.android.esafety.bean.SubStandard"/>
     </list>
 </litepal>

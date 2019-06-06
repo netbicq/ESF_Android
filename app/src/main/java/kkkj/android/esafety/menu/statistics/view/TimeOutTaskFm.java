@@ -91,8 +91,12 @@ public class TimeOutTaskFm extends MvpBaseFragment<TimeOutTaskPresenter> impleme
     @Override
     public void onComplete() {
         super.onComplete();
-        smartRefreshLayout.finishRefresh();
-        smartRefreshLayout.finishLoadMore();
+        if(smartRefreshLayout!=null)
+        {
+            smartRefreshLayout.finishRefresh();
+            smartRefreshLayout.finishLoadMore();
+        }
+
     }
     @Override
     public void getTimeOutTaskSuc(PagerOfTimeOutTask data) {

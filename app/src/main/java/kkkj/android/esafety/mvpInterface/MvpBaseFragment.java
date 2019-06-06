@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
+import android.os.Looper;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -199,6 +200,10 @@ public abstract class MvpBaseFragment<T extends MvpPresenter> extends Fragment i
 
     @Override
     public void showToast(String msg) {
+        if(Looper.myLooper()==null)
+        {
+            Looper.prepare();
+        }
         if (getUserVisibleHint()) {
             if (tLoading.isShowing()) {
                 tLoading.dismiss();
@@ -211,6 +216,10 @@ public abstract class MvpBaseFragment<T extends MvpPresenter> extends Fragment i
 
     @Override
     public void showErr(String msg) {
+        if(Looper.myLooper()==null)
+        {
+            Looper.prepare();
+        }
         if (getUserVisibleHint()) {
             if (tLoading.isShowing()) {
                 tLoading.dismiss();
@@ -223,7 +232,13 @@ public abstract class MvpBaseFragment<T extends MvpPresenter> extends Fragment i
 
     @Override
     public boolean getUserVisibleHint() {
-        return checkIsVisible(mContext,getView());
+        if(getView()!=null)
+        {
+            return checkIsVisible(mContext,getView());
+        }
+        else {
+            return false;
+        }
     }
 
     /**

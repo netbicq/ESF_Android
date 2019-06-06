@@ -4,6 +4,7 @@ import android.text.TextUtils;
 
 import com.contrarywind.interfaces.IPickerViewData;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -160,7 +161,7 @@ public class TempTaskSelector {
                 Entities = entities;
             }
 
-            public static class Entity implements IPickerViewData
+            public static class Entity implements IPickerViewData, Serializable
             {
                 private String SubjectID= "";
                 private String SubName = "";

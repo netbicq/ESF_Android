@@ -95,8 +95,12 @@ public class ControlsChildFm extends MvpBaseFragment<ControlsChildPresenter> imp
     @Override
     public void onComplete() {
         super.onComplete();
-        smartRefreshLayout.finishRefresh();
-        smartRefreshLayout.finishLoadMore();
+        if(smartRefreshLayout!=null)
+        {
+            smartRefreshLayout.finishRefresh();
+            smartRefreshLayout.finishLoadMore();
+        }
+
     }
 
     @Override

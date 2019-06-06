@@ -6,6 +6,7 @@ import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Looper;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
@@ -178,6 +179,11 @@ public abstract class MvpBaseActivity<T extends MvpPresenter> extends AppCompatA
 
     @Override
     public void showToast(String msg) {
+
+        if(Looper.myLooper()==null)
+        {
+            Looper.prepare();
+        }
         if (tLoading.isShowing()) {
             tLoading.dismiss();
         }
@@ -186,6 +192,10 @@ public abstract class MvpBaseActivity<T extends MvpPresenter> extends AppCompatA
 
     @Override
     public void showErr(String msg) {
+        if(Looper.myLooper()==null)
+        {
+            Looper.prepare();
+        }
         if (tLoading.isShowing()) {
             tLoading.dismiss();
         }

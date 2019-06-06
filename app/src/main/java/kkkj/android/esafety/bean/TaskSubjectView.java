@@ -1,7 +1,17 @@
 package kkkj.android.esafety.bean;
 
+import android.text.TextUtils;
+
+import com.orhanobut.logger.Logger;
+
+import org.litepal.LitePal;
 import org.litepal.annotation.Column;
 import org.litepal.crud.LitePalSupport;
+import org.litepal.crud.async.SaveExecutor;
+import org.litepal.crud.callback.SaveCallback;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class TaskSubjectView extends LitePalSupport {
     @Column(unique = true, defaultValue = "unknow")
@@ -19,6 +29,55 @@ public class TaskSubjectView extends LitePalSupport {
     String DangerName = "";
     String DangerID = "";
     boolean IsControl = false;
+
+    List<SubStandard> SubStandards;
+
+
+    String LastResult;
+
+    public String getLastResult() {
+        if(TextUtils.isEmpty(LastResult))
+        {
+            return "";
+        }
+        return LastResult;
+    }
+
+    public void setLastResult(String lastResult) {
+        LastResult = lastResult;
+    }
+
+    @Override
+    public SaveExecutor saveOrUpdateAsync(String... conditions) {
+        for(int i = 0 ;i<getSubStandards().size();i++)
+        {
+            getSubStandards().get(i).setKeyID(getKeyID());
+            getSubStandards().get(i).saveOrUpdateAsync("KeyID = ? and SubStandardID = ?",getKeyID(),getSubStandards().get(i).getSubStandardID()).listen(new SaveCallback() {
+                @Override
+                public void onFinish(boolean success) {
+                    Logger.d("保存标准"+success);
+                }
+            });
+        }
+        return super.saveOrUpdateAsync(conditions);
+    }
+
+    @Override
+    public int delete() {
+        return super.delete();
+    }
+
+    public void setSubStandards(List<SubStandard> subStandards) {
+        SubStandards = subStandards;
+    }
+
+    public List<SubStandard> getSubStandards() {
+        if(SubStandards==null)
+        {
+            return new ArrayList<>();
+        }
+        return SubStandards;
+    }
 
     public boolean isControl() {
         return IsControl;

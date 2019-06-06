@@ -7,12 +7,17 @@ import android.widget.FrameLayout;
 
 import com.flyco.tablayout.SegmentTabLayout;
 import com.flyco.tablayout.listener.OnTabSelectListener;
+import com.orhanobut.logger.Logger;
+
+import org.litepal.LitePal;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import kkkj.android.esafety.R;
+import kkkj.android.esafety.bean.SubStandard;
+import kkkj.android.esafety.bean.TaskSubjectView;
 import kkkj.android.esafety.mvpInterface.MvpBaseActivity;
 import kkkj.android.esafety.mvpInterface.MvpPresenter;
 
@@ -38,8 +43,11 @@ public class MyTaskBillActivity extends MvpBaseActivity {
 
     @Override
     protected void initMonitorAndData() {
+        List<SubStandard> test =  LitePal.findAll(SubStandard.class);
+        Logger.d(test.size());
+
         action_bar_title.setText("任务详情");
-        String[] mTitles = {"当前单据", "历史单据"};
+        String[] mTitles = {"当前检查单", "历史检查单"};
         tabLayout_1.setTabData(mTitles);
         tabLayout_1.setOnTabSelectListener(new OnTabSelectListener() {
             @Override

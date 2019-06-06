@@ -51,7 +51,7 @@ public class GetTaskListModel extends MvpModel<GetTaskListModel.Request, GetTask
                                 {
                                     for (int i = 0 ;i<response.getData().size();i++)
                                     {
-                                        response.getData().get(i).saveOrUpdate("TaskID = ?",response.getData().get(i).getTaskID());
+                                        response.getData().get(i).saveOrUpdateAsync("TaskID = ?",response.getData().get(i).getTaskID());
                                     }
                                 }
                                 callback.onSuccess(response);

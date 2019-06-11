@@ -318,7 +318,7 @@ public class AddTemWorkActivity extends MvpBaseActivity<AddTemWorkPresenter> imp
                 EndTimePicker.show();
                 break;
             case R.id.ll_subject:
-                //主体选择
+                //风控项
                 if(CSubs.size()>0)
                 {
                     startActivityForResult(new Intent(mContext, PickDangersActivity.class).putExtra("CSubs", (Serializable) CSubs),201);

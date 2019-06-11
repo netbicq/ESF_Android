@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="horizontal"
     android:layout_marginTop="5dp"
     android:layout_height="wrap_content">
@@ -10,7 +11,7 @@
         android:layout_weight="1"
         android:gravity="center|start"
         android:layout_height="wrap_content"
-        android:text="执行人"
+        tools:text="执行人"
         android:textColor="@color/complete"
         android:textSize="12sp" />
     <TextView
@@ -19,7 +20,7 @@
         android:layout_weight="1"
         android:gravity="center|start"
         android:layout_height="wrap_content"
-        android:text="执行结果"
+        tools:text="执行结果"
         android:textColor="@color/complete"
         android:textSize="12sp" />
 </LinearLayout>

@@ -270,6 +270,7 @@ public abstract class MvpBaseFragment<T extends MvpPresenter> extends Fragment i
         hideLoading();
     }
 
+
     public void reserve(String remarks) {
     }
 }

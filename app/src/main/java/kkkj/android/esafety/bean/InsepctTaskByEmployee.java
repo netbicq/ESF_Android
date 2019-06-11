@@ -20,6 +20,12 @@ public class InsepctTaskByEmployee extends LitePalSupport {
     int CycleValue = 0;//频率值
     int CycleDateType = 0;//频率日期类型
     String CycleName = "";//执行频率
+    boolean HasDone = false;//是否做过
+
+    public boolean isHasDone() {
+        return HasDone;
+    }
+
     public int getCycleValue() {
         return CycleValue;
     }

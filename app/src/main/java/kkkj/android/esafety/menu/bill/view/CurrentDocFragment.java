@@ -98,6 +98,7 @@ public class CurrentDocFragment extends MvpBaseFragment<CurrentDocFPresenter> im
                         }
 
                         break;
+
                 }
             }
         });

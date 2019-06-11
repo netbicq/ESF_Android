@@ -27,7 +27,8 @@ import kkkj.android.esafety.customer.SlideRecyclerView;
 import kkkj.android.esafety.home.model.AddBillModel;
 import kkkj.android.esafety.home.model.GetEmpTaskByQRCoderModel;
 import kkkj.android.esafety.menu.bill.view.MyTaskBillActivity;
-import kkkj.android.esafety.menu.task.adapter.InsepctTaskByEmployeeAdapter;
+import kkkj.android.esafety.menu.task.adapter.NormalTaskByEmployeeAdapter;
+import kkkj.android.esafety.menu.task.adapter.OvertimeTaskByEmployeeAdapter;
 import kkkj.android.esafety.menu.task.contract.NormalTaskFContract;
 import kkkj.android.esafety.menu.task.model.GetTaskListModel;
 import kkkj.android.esafety.menu.task.presenter.NormalTaskFPresenter;
@@ -39,7 +40,7 @@ public class NormalTaskFragment extends MvpBaseFragment<NormalTaskFPresenter> im
     @BindView(R.id.recyclerview)
     SlideRecyclerView recyclerView;
     List<InsepctTaskByEmployee> mList;
-    InsepctTaskByEmployeeAdapter adapter;
+    NormalTaskByEmployeeAdapter adapter;
     NewBillDialog dialog2;
     CustomerDialog dialog;
     boolean isCompleteJump;
@@ -63,7 +64,7 @@ public class NormalTaskFragment extends MvpBaseFragment<NormalTaskFPresenter> im
     protected void initMonitorAndData() {
         mList = new ArrayList<>();
         smartRefreshLayout.setEnableLoadMore(false);
-        adapter = new InsepctTaskByEmployeeAdapter(R.layout.item_mytask2, mList);
+        adapter = new NormalTaskByEmployeeAdapter(R.layout.item_mytask2, mList);
         adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
@@ -80,7 +81,8 @@ public class NormalTaskFragment extends MvpBaseFragment<NormalTaskFPresenter> im
                 dialog.show();
             }
         });
-        adapter.setOnDeleteClickListener(new InsepctTaskByEmployeeAdapter.OnDeleteClickLister() {
+        //新建单据
+        adapter.setOnDeleteClickListener(new NormalTaskByEmployeeAdapter.OnDeleteClickLister() {
             @Override
             public void onDeleteClick(View view, int position) {
                 dialog2 = new NewBillDialog(mContext, 200, mList.get(position).getTaskID(),new NewBillDialog.OnDialogButtonClickListener() {

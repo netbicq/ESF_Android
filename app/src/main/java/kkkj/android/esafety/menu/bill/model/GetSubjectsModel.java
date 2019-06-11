@@ -20,6 +20,9 @@ import kkkj.android.esafety.mvpInterface.MvpModel;
 
 import static kkkj.android.esafety.utils.NetUtils.checkNetWork;
 
+/**
+ * 当前检查单
+ */
 
 public class GetSubjectsModel extends MvpModel<GetSubjectsModel.Request, GetSubjectsModel.Response> {
     @Override

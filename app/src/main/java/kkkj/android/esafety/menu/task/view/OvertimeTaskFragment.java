@@ -26,7 +26,7 @@ import kkkj.android.esafety.customer.NewBillDialog;
 import kkkj.android.esafety.customer.SlideRecyclerView;
 import kkkj.android.esafety.home.model.AddBillModel;
 import kkkj.android.esafety.menu.bill.view.MyTaskBillActivity;
-import kkkj.android.esafety.menu.task.adapter.InsepctTaskByEmployeeAdapter;
+import kkkj.android.esafety.menu.task.adapter.OvertimeTaskByEmployeeAdapter;
 import kkkj.android.esafety.menu.task.contract.OvertimeTaskFContract;
 import kkkj.android.esafety.menu.task.model.GetEmpTaskTimeOutByQRCoderModel;
 import kkkj.android.esafety.menu.task.model.GetTimeTaskModel;
@@ -39,7 +39,7 @@ public class OvertimeTaskFragment extends MvpBaseFragment<OvertimeTaskFPresenter
     @BindView(R.id.recyclerview)
     SlideRecyclerView recyclerView;
     List<InsepctTaskByEmployee> mList;
-    InsepctTaskByEmployeeAdapter adapter;
+    OvertimeTaskByEmployeeAdapter adapter;
     CustomerDialog dialog;
     NewBillDialog dialog2;
     boolean isCompleteJump;
@@ -63,7 +63,7 @@ public class OvertimeTaskFragment extends MvpBaseFragment<OvertimeTaskFPresenter
     protected void initMonitorAndData() {
         mList = new ArrayList<>();
         smartRefreshLayout.setEnableLoadMore(false);
-        adapter = new InsepctTaskByEmployeeAdapter(R.layout.item_mytask2, mList);
+        adapter = new OvertimeTaskByEmployeeAdapter(R.layout.item_mytask2, mList);
         adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
@@ -80,7 +80,7 @@ public class OvertimeTaskFragment extends MvpBaseFragment<OvertimeTaskFPresenter
                 dialog.show();
             }
         });
-        adapter.setOnDeleteClickListener(new InsepctTaskByEmployeeAdapter.OnDeleteClickLister() {
+        adapter.setOnDeleteClickListener(new OvertimeTaskByEmployeeAdapter.OnDeleteClickLister() {
             @Override
             public void onDeleteClick(View view, int position) {
                 dialog2 = new NewBillDialog(mContext, 200, mList.get(position).getTaskID(),new NewBillDialog.OnDialogButtonClickListener() {

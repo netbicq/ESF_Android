@@ -36,11 +36,13 @@ public class DangerPointFm extends MvpBaseFragment<DangerPointPresenter> impleme
 
     @Override
     public void onResume() {
+        mPresenter.getDangerLevels(new GetDangerLevelsModel.Request());
         super.onResume();
     }
 
     @Override
     protected DangerPointPresenter getPresenter() {
+
         return new DangerPointPresenter();
     }
 
@@ -52,7 +54,7 @@ public class DangerPointFm extends MvpBaseFragment<DangerPointPresenter> impleme
         tabLayout.setupWithViewPager(vp);
         adapter = new StatisticsPagerAdapter(getChildFragmentManager());
         vp.setAdapter(adapter);
-        mPresenter.getDangerLevels(new GetDangerLevelsModel.Request());
+
     }
 
     @Override

@@ -90,8 +90,10 @@ public class MyTaskDetailsActivity extends MvpBaseActivity<MyTaskDetailsPresente
 
                 Intent intent = new Intent(mContext, TaskResultActivity.class);
                 if (mType == 0) {
+                    //当前检查单
                     intent.putExtra("subresultid", "");
                 } else {
+                    //历史检查单
                     intent.putExtra("subresultid", mList.get(position).getSubResultID());
                 }
                 intent.putExtra("billID", mList.get(position).getBillID());
@@ -125,10 +127,12 @@ public class MyTaskDetailsActivity extends MvpBaseActivity<MyTaskDetailsPresente
             @Override
             public void onRefresh(@NonNull RefreshLayout refreshLayout) {
                 if (mType == 0) {
+                    //当前检查单
                     GetSubjectsModel.Request request = new GetSubjectsModel.Request();
                     request.setBillid(mBillid);
                     mPresenter.getsubjects(request);
                 } else {
+                    //历史检查单
                     GetTaskSuboverModel.Request request = new GetTaskSuboverModel.Request();
                     request.setBillid(mBillid);
                     mPresenter.gettasksubover(request);
@@ -142,7 +146,7 @@ public class MyTaskDetailsActivity extends MvpBaseActivity<MyTaskDetailsPresente
         super.onResume();
         smartRefreshLayout.autoRefresh();
     }
-
+    //当前检查单
     @Override
     public void getsubjectsSuc(List<TaskSubjectView> data) {
         for(int i = 0 ;i<data.size();i++)
@@ -159,7 +163,7 @@ public class MyTaskDetailsActivity extends MvpBaseActivity<MyTaskDetailsPresente
         mData = data;
         initTab();
     }
-
+    //历史检查单
     @Override
     public void gettasksuboverSuc(List<TaskSubjectView> data) {
         for(int i = 0 ;i<data.size();i++)

@@ -24,7 +24,7 @@ import kkkj.android.esafety.menu.institution.presenter.InstitutioFPresenter;
 import kkkj.android.esafety.mvpInterface.MvpBaseActivity;
 
 /**
- * 制度和预案
+ * 公告公示
  */
 public class InstitutionActivity2 extends MvpBaseActivity <InstitutioFPresenter> implements InstitutioFContract.View {
     @BindView(R.id.smartRefreshLayout)

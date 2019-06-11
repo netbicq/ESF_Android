@@ -1,5 +1,6 @@
 package kkkj.android.esafety.menu.task.adapter;
 
+import android.graphics.Color;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.view.View;
@@ -12,9 +13,9 @@ import java.util.List;
 import kkkj.android.esafety.R;
 import kkkj.android.esafety.bean.InsepctTaskByEmployee;
 
-public class InsepctTaskByEmployeeAdapter extends BaseQuickAdapter<InsepctTaskByEmployee
+public class OvertimeTaskByEmployeeAdapter extends BaseQuickAdapter<InsepctTaskByEmployee
         , BaseViewHolder> {
-    public InsepctTaskByEmployeeAdapter(int layoutResId, @Nullable List<InsepctTaskByEmployee> data) {
+    public OvertimeTaskByEmployeeAdapter(int layoutResId, @Nullable List<InsepctTaskByEmployee> data) {
         super(layoutResId, data);
     }
 

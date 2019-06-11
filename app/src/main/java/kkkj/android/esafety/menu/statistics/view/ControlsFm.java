@@ -36,6 +36,7 @@ public class ControlsFm extends MvpBaseFragment<ControlsPresenter> implements Co
     @Override
     public void onResume() {
         super.onResume();
+        mPresenter.getCtrMenu(new GetCtrMenuModel.Request());
 
     }
 
@@ -52,7 +53,6 @@ public class ControlsFm extends MvpBaseFragment<ControlsPresenter> implements Co
         tabLayout.setupWithViewPager(vp);
         adapter = new StatisticsPagerAdapter(getChildFragmentManager());
         vp.setAdapter(adapter);
-        mPresenter.getCtrMenu(new GetCtrMenuModel.Request());
     }
 
     @Override

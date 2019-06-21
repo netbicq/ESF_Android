@@ -149,6 +149,8 @@ public class MyTaskDetailsActivity extends MvpBaseActivity<MyTaskDetailsPresente
     //当前检查单
     @Override
     public void getsubjectsSuc(List<TaskSubjectView> data) {
+        mData = data;
+        initTab();
         for(int i = 0 ;i<data.size();i++)
         {
             for(int j = 0 ;j<data.get(i).getSubStandards().size();j++)
@@ -160,12 +162,13 @@ public class MyTaskDetailsActivity extends MvpBaseActivity<MyTaskDetailsPresente
             }
 
         }
-        mData = data;
-        initTab();
+
     }
     //历史检查单
     @Override
     public void gettasksuboverSuc(List<TaskSubjectView> data) {
+        mData = data;
+        initTab();
         for(int i = 0 ;i<data.size();i++)
         {
             for(int j = 0 ;j<data.get(i).getSubStandards().size();j++)
@@ -177,8 +180,7 @@ public class MyTaskDetailsActivity extends MvpBaseActivity<MyTaskDetailsPresente
             }
 
         }
-        mData = data;
-        initTab();
+
     }
 
     public void initTab() {

@@ -7,6 +7,8 @@ import java.util.List;
 
 public class PagerOfTroubleCtrsPage {
     List<TroubleCtrsPage> Data;
+    int state;
+    String msg;
     int Pages;
     int Items;
     String ExcelResult;
@@ -17,6 +19,14 @@ public class PagerOfTroubleCtrsPage {
             return new ArrayList<>();
         }
         return Data;
+    }
+
+    public int getState() {
+        return state;
+    }
+
+    public String getMsg() {
+        return msg;
     }
 
     public int getPages() {

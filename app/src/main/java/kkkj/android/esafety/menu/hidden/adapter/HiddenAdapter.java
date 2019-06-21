@@ -154,6 +154,10 @@ public class HiddenAdapter extends BaseQuickAdapter<APPTroubleCtrView, BaseViewH
             helper.setText(R.id.tv_left1, item.getDangerPoint());
         }
 
+        if (!TextUtils.isEmpty(item.getPrincipal())) {
+            helper.setText(R.id.tv_mid, "负责人:"+item.getPrincipal());
+        }
+
         if (item.getState() == 1) {
             helper.setText(R.id.tv_right1, "管控中");
         } else if (item.getState() == 2) {

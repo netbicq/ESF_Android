@@ -3,6 +3,7 @@ package kkkj.android.esafety.menu.statistics.view;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -11,12 +12,14 @@ import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 import butterknife.BindView;
 import kkkj.android.esafety.R;
 import kkkj.android.esafety.bean.PagerOfTroubleCtrsPage;
 import kkkj.android.esafety.bean.TroubleCtrsPage;
 import kkkj.android.esafety.menu.statistics.adapter.ControlsChildAdapter;
+import kkkj.android.esafety.menu.statistics.adapter.ControlsChildIngAdapter;
 import kkkj.android.esafety.menu.statistics.contract.ControlsChildContract;
 import kkkj.android.esafety.menu.statistics.model.GetTroubleCtrsPageModel;
 import kkkj.android.esafety.menu.statistics.presenter.ControlsChildPresenter;
@@ -30,6 +33,7 @@ public class ControlsChildFm extends MvpBaseFragment<ControlsChildPresenter> imp
     RecyclerView recyclerview;
 
     ControlsChildAdapter adapter;
+    ControlsChildIngAdapter ingAdapter;
     List<TroubleCtrsPage> mList;
 
     GetTroubleCtrsPageModel.Request request ;
@@ -55,8 +59,16 @@ public class ControlsChildFm extends MvpBaseFragment<ControlsChildPresenter> imp
     protected void initMonitorAndData() {
         request = new GetTroubleCtrsPageModel.Request();
         mList = new ArrayList<>();
+
         adapter = new ControlsChildAdapter(R.layout.item_control_child,mList);
-        recyclerview.setAdapter(adapter);
+        ingAdapter = new ControlsChildIngAdapter(R.layout.item_control_child_ing,mList);
+
+        if (menuValue == 1) {
+            recyclerview.setAdapter(ingAdapter);
+        } else {
+            recyclerview.setAdapter(adapter);
+        }
+
         recyclerview.setLayoutManager(new LinearLayoutManager(mContext,LinearLayoutManager.VERTICAL,false));
 
         smartRefreshLayout.setEnableLoadMore(true);
@@ -119,6 +131,7 @@ public class ControlsChildFm extends MvpBaseFragment<ControlsChildPresenter> imp
                 PageIndex--;
             }
         }
+        ingAdapter.notifyDataSetChanged();
         adapter.notifyDataSetChanged();
     }
 }

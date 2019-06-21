@@ -56,7 +56,6 @@ public class OvertimeTaskFragment extends MvpBaseFragment<OvertimeTaskFPresenter
     @Override
     public void onResume() {
         super.onResume();
-
     }
 
     @Override

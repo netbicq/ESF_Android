@@ -27,6 +27,15 @@
                 android:text="风险点" />
 
             <TextView
+                android:id="@+id/tv_mid"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                style="@style/BaseTextViewStyle"
+                android:gravity="center"
+                android:text="负责人：XX" />
+
+            <TextView
                 android:id="@+id/tv_right1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"

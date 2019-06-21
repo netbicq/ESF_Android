@@ -46,14 +46,14 @@ public class GetSubjectsModel extends MvpModel<GetSubjectsModel.Request, GetSubj
                     response.setData(list);
                     callback.onSuccess(response);
                 } else {
-//                    callback.onFailure("未查询到相关数据");
+                    callback.onFailure("未查询到相关数据");
                 }
                 callback.onComplete();
             } catch (Exception e) {
                 callback.onError(e);
             }
         } else {
-
+            Logger.d("state" + request.getBillid());
             apiApp.getsubjects(request.getBillid())
                     .subscribeOn(Schedulers.io())//IO线程加载数据
                     .observeOn(AndroidSchedulers.mainThread())//主线程显示数据
@@ -65,6 +65,7 @@ public class GetSubjectsModel extends MvpModel<GetSubjectsModel.Request, GetSubj
                         @Override
                         public void onNext(GetSubjectsModel.Response response) {
                             if (response.getState() == RESPONSE_OK) {
+                                callback.onSuccess(response);
                                 if (response.getData().size() > 0) {
                                     for (int i = 0; i < response.getData().size(); i++) {
                                         List<Subject> subjectList = LitePal.where("SubjectID = ? and BillID = ? and DangerID=?"
@@ -77,7 +78,7 @@ public class GetSubjectsModel extends MvpModel<GetSubjectsModel.Request, GetSubj
                                     }
                                 }
 
-                                callback.onSuccess(response);
+
                             } else {
                                 callback.onFailure(response.getMsg());
                             }

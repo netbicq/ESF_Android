@@ -19,8 +19,15 @@ public class ControlsChildAdapter extends BaseQuickAdapter<TroubleCtrsPage, Base
     @Override
     protected void convert(BaseViewHolder helper, TroubleCtrsPage item) {
         helper.setText(R.id.tv_left1,item.getBillEmp());
-        helper.setText(R.id.tv_right1,item.getDangerLevel());
-        helper.setText(R.id.tv_left2,item.getPrincipal());
+        helper.setText(R.id.tv_right1,item.getPrincipal());
+
+        helper.setText(R.id.tv_left2,item.getDangerLevel());
         helper.setText(R.id.tv_right2,item.getTroubleLevel());
+
+        helper.setText(R.id.tv_left3,item.getSubType());
+        helper.setText(R.id.tv_right3,item.getCheckSub());
+
+        helper.setText(R.id.tv_left4,item.getDangerPoint());
+        helper.setText(R.id.tv_right4,item.getDanger());
     }
 }

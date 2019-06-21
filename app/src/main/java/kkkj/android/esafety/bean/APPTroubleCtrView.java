@@ -26,6 +26,16 @@ public class APPTroubleCtrView implements Serializable {
     // 1负责人 处理 归档 转让责任人 快速处理
     // 2执行人 申请验收
     // 3验收人 验收
+    String BID = "";
+    String FEmp = "";//发现人
+
+    public String getBID() {
+        return BID;
+    }
+
+    public String getFEmp() {
+        return FEmp;
+    }
 
     public String getExecutorID() {
         if(TextUtils.isEmpty(ExecutorID))

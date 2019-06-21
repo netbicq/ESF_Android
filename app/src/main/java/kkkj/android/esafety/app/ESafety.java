@@ -95,7 +95,7 @@ public class ESafety extends ZApplication {
 //        Bugly.init(getApplicationContext(), "3dee6816b9", false);
         Logger.d("Logger初始化成功");
         //是否开启debug模式，true表示打开debug模式，false表示关闭调试模式
-        Bugly.init(mContext, "0776eeab1a", false);
+        Bugly.init(mContext, "b001877a61", false);//  0776eeab1a
         initX5WebView();
     }
     public static synchronized ESafety getInstance() {

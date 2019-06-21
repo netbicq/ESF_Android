@@ -57,7 +57,7 @@ public class GetTroubleCtrsPageModel extends MvpModel<GetTroubleCtrsPageModel.Re
     public static class Request extends ESafetyRequest {
         int PageSize;//每页返回条数
         int PageIndex;//页数
-        int Query;//风险点id
+        int Query;//风险点id ，1整改中，其他表示未整改
 
         public void setPageSize(int pageSize) {
             PageSize = pageSize;

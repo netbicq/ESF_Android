@@ -26,6 +26,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import kkkj.android.esafety.R;
+import kkkj.android.esafety.bean.BillData;
 import kkkj.android.esafety.bean.DangerLevelDict;
 import kkkj.android.esafety.bean.Dict;
 import kkkj.android.esafety.bean.DownloadData;
@@ -217,7 +218,22 @@ public class TabHome extends MvpBaseFragment<TabHomePresenter> implements View.O
         if (data != null) {
             OverTimeTaskCount = data.getOverTimeTaskCount();
             menuList.get(0).setCount(OverTimeTaskCount);
-            menuList.get(1).setCount(data.getBillDatas().size());
+
+            List<BillData> mBillDatas = data.getBillDatas();
+            int count = 0;//我的检查单角标
+            int SubCount= 0;//未检查
+            int SubCheckedCount=0;//已检查
+            for (int i=0;i<mBillDatas.size();i++) {
+                BillData mBillData = mBillDatas.get(i);
+                SubCount  = mBillData.getSubCount();
+                SubCheckedCount = mBillData.getSubCheckedCount();
+                if (SubCount == SubCheckedCount) {
+                    count = count + 1;
+                }
+            }
+
+            menuList.get(1).setCount(count);
+
             adapter.notifyDataSetChanged();
             LitePal.deleteAll(TaskBillModel.class);
             LitePal.deleteAll(TaskSubjectView.class);
@@ -227,6 +243,7 @@ public class TabHome extends MvpBaseFragment<TabHomePresenter> implements View.O
             LitePal.deleteAll(EnumItem.class);
             LitePal.deleteAll(Emp.class);
             LitePal.deleteAll(Org.class);
+
             for (int i = 0; i < data.getBillDatas().size(); i++) {
                 TaskBillModel taskBillModel = new TaskBillModel();
                 taskBillModel.setBillID(data.getBillDatas().get(i).getBillID());
@@ -242,8 +259,8 @@ public class TabHome extends MvpBaseFragment<TabHomePresenter> implements View.O
                 taskBillModel.saveOrUpdateAsync("BillID = ?", data.getBillDatas().get(i).getBillID()).listen(new SaveCallback() {
                     @Override
                     public void onFinish(boolean success) {
-                        if(success)
-                        {
+                        if(success) {
+
                             for (int j = 0; j < data.getBillDatas().get(finalI).getCheckSubs().size(); j++) {
                                 TaskSubjectView taskSubjectView = new TaskSubjectView();
                                 taskSubjectView.setDangerName(data.getBillDatas().get(finalI).getCheckSubs().get(j).getDangerName());
@@ -260,6 +277,7 @@ public class TabHome extends MvpBaseFragment<TabHomePresenter> implements View.O
                                 taskSubjectView.setSubTypeName(data.getBillDatas().get(finalI).getCheckSubs().get(j).getSubTypeName());
                                 taskSubjectView.setControl(data.getBillDatas().get(finalI).getCheckSubs().get(j).isControl());
                                 taskSubjectView.setSubStandards(data.getBillDatas().get(finalI).getCheckSubs().get(j).getSubStandards());
+
                                 taskSubjectView.saveOrUpdateAsync("KeyID = ?", data.getBillDatas().get(finalI).getCheckSubs().get(j).getKeyID())
                                         .listen(new SaveCallback() {
                                             @Override

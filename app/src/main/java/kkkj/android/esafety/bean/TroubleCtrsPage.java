@@ -8,6 +8,14 @@ public class TroubleCtrsPage {
     String Principal;
     String TroubleLevel;
 
+    String DangerPoint;
+    String SubType;
+    String CheckSub;
+    String Danger;
+    String AEmp;
+    String EEmp;
+    String CTime;
+
     public String getBillEmp() {
         if(TextUtils.isEmpty(BillEmp))
         {
@@ -38,5 +46,33 @@ public class TroubleCtrsPage {
             return "";
         }
         return TroubleLevel;
+    }
+
+    public String getDangerPoint() {
+        return DangerPoint;
+    }
+
+    public String getSubType() {
+        return SubType;
+    }
+
+    public String getCheckSub() {
+        return CheckSub;
+    }
+
+    public String getDanger() {
+        return Danger;
+    }
+
+    public String getAEmp() {
+        return AEmp;
+    }
+
+    public String getEEmp() {
+        return EEmp;
+    }
+
+    public String getCTime() {
+        return CTime;
     }
 }

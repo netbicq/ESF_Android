@@ -133,7 +133,7 @@ public class HiddenTroubleControlActivity extends MvpBaseActivity<HiddenTroubleP
                         }
                         checkCustomerDialog.show();
                         break;
-                    case R.id.tv_menu3:
+                    case R.id.tv_menu3://处理
                         startActivityForResult(new Intent(mContext, HandleCtrActivity.class).putExtra("Trouble", mList.get(position)),1000);
                         break;
                     case R.id.tv_menu4:

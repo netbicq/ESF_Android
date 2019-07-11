@@ -54,7 +54,6 @@ public class DangerPointFm extends MvpBaseFragment<DangerPointPresenter> impleme
         tabLayout.setupWithViewPager(vp);
         adapter = new StatisticsPagerAdapter(getChildFragmentManager());
         vp.setAdapter(adapter);
-
     }
 
     @Override

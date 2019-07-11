@@ -6,7 +6,7 @@ android {
         applicationId "kkkj.android.esafety"
         minSdkVersion 19
         targetSdkVersion 28
-        versionCode 5
+        versionCode 6
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
@@ -33,7 +33,7 @@ dependencies {
     //使用Logger框架处理日志
     implementation 'com.orhanobut:logger:2.2.0'
     //腾讯bugly
-    implementation 'com.tencent.bugly:crashreport_upgrade:latest.release'
+    implementation 'com.tencent.bugly:crashreport_upgrade:1.4.1'
     //腾讯qmui
     implementation 'com.qmuiteam:qmui:1.2.0'
     //retrofit

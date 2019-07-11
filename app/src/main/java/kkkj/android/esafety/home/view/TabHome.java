@@ -475,7 +475,7 @@ public class TabHome extends MvpBaseFragment<TabHomePresenter> implements View.O
             }
 
             for(int i = 0 ;i<data.getEmps().size();i++)
-            {
+            {   Logger.d("-------------->" + "name:" + data.getEmps().get(i).getCNName() + data.getEmps().get(i).getOrgID());
                 data.getEmps().get(i).saveOrUpdateAsync("KeyID=?",data.getEmps().get(i).getKeyID()).listen(new SaveCallback() {
                     @Override
                     public void onFinish(boolean success) {
@@ -488,7 +488,8 @@ public class TabHome extends MvpBaseFragment<TabHomePresenter> implements View.O
             }
 
             for(int i = 0 ;i<data.getOrgs().size();i++)
-            {
+            {   Logger.d("-------------->" + "orgskey:" + data.getOrgs().get(i).getOrgName() + data.getOrgs().get(i).getKeyID());
+                Logger.d("-------------->" + "orgsparent:" + data.getOrgs().get(i).getOrgName() + data.getOrgs().get(i).getParentID());
                 data.getOrgs().get(i).saveOrUpdateAsync("KeyID=?",data.getOrgs().get(i).getKeyID())
                 .listen(new SaveCallback() {
                     @Override

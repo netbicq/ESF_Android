@@ -156,10 +156,10 @@ public class HandleCtrActivity extends MvpBaseActivity<HandleCtrPresenter> imple
 
 
                 break;
-            case R.id.ll_zhixr:
+            case R.id.ll_zhixr://执行人
                 startActivityForResult(new Intent(mContext, PickPersonActivity.class), PickRequest1);
                 break;
-            case R.id.ll_yansr:
+            case R.id.ll_yansr://验收人
                 startActivityForResult(new Intent(mContext, PickPersonActivity.class), PickRequest2);
                 break;
             case R.id.ll_time:
